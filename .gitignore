@@ -11,3 +11,25 @@ wheels/
 
 # DS_Store
 **/.DS_Store
+
+# Vidruma: large or generated files, rebuilt by scripts (see README, "Large files")
+ext/
+data/corpora/
+data/silver/gretil/
+results/**/vectors.npz
+results/**/subword_oov.npz
+results/**/cooc_cache/
+results/**/glove_work/
+results/**/items_*.json
+!results/all_nolex+np/*/items_ours+spell@clean.json
+!results/all_nolex+np/*/items_ours+center+spell@clean.json
+results/**/*.log
+results/smoke/
+.pytest_cache/
+
+# LaTeX build files
+report/**/*.aux
+report/**/*.log
+report/**/*.out
+report/**/*.bbl
+report/**/*.blg

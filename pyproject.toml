@@ -1,7 +1,19 @@
 [project]
 name = "project"
 version = "0.1.0"
-description = "Add your description here"
+description = "Vidruma: sense-disambiguated distributional semantics for Sanskrit (DCS, EvalSan, Amarakosa)"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "numpy>=2.1",
+    "scipy>=1.14",
+    "scikit-learn>=1.5",
+    "gensim>=4.3.3",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

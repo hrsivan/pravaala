@@ -1,0 +1,54 @@
+{
+ "rel_dev": {
+  "tokens": 9102,
+  "wx": 5831,
+  "invariant": 3175,
+  "both": 95,
+  "neither": 1,
+  "rows": 4551,
+  "rows_consistent": 4526,
+  "rows_mixed_uncertain": 25
+ },
+ "rel_test": {
+  "tokens": 9102,
+  "wx": 5797,
+  "invariant": 3190,
+  "both": 114,
+  "neither": 1,
+  "rows": 4551,
+  "rows_consistent": 4524,
+  "rows_mixed_uncertain": 27
+ },
+ "syn_mcq": {
+  "tokens": 15170,
+  "wx": 9817,
+  "invariant": 5184,
+  "neither": 2,
+  "both": 167,
+  "rows": 3034,
+  "rows_consistent": 2973,
+  "rows_mixed_uncertain": 61
+ },
+ "cat_sem": {
+  "tokens": 154,
+  "slp1": 87,
+  "invariant": 61,
+  "both": 2,
+  "neither": 4,
+  "rows": 15,
+  "rows_consistent": 14,
+  "rows_mixed_uncertain": 1
+ },
+ "cat_syn": {
+  "tokens": 1080,
+  "invariant": 335,
+  "slp1": 283,
+  "neither": 460,
+  "wx": 1,
+  "both": 1,
+  "rows": 45,
+  "rows_consistent": 38,
+  "rows_mixed_uncertain": 6,
+  "rows_mixed_certain": 1
+ }
+}

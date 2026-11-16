@@ -1,0 +1,15 @@
+{
+ "rel_test_pairs": 4551,
+ "rel_dev_pairs": 4551,
+ "dev_test_pair_overlap": 38,
+ "dev_test_word_overlap_frac_of_test_words": 0.7478260869565218,
+ "duplicate_pairs_in_test": 25,
+ "pairs_with_conflicting_labels": 7,
+ "self_pairs": 25,
+ "mcq_items": 3034,
+ "mcq_duplicate_items": 0,
+ "mcq_items_with_repeated_word": 69,
+ "mcq_words_also_in_rel_test_frac": 0.6836861768368617,
+ "mcq_gold_shares_AK_synset": 2596,
+ "mcq_items_with_synonymous_distractor": 78
+}

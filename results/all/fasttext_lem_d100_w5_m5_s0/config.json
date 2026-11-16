@@ -1,0 +1,19 @@
+{
+ "subset": "all",
+ "view": "lem",
+ "model": "fasttext",
+ "dim": "100",
+ "window": "5",
+ "min_count": "5",
+ "epochs": "5",
+ "glove_epochs": "15",
+ "workers": "2",
+ "seed": "0",
+ "corpora": "data/corpora",
+ "results": "results",
+ "evalsan": "ext/EvalSan/evaluations/Intrinsic/Data",
+ "amara": "ext/amara-quiz/database/amara_pada.csv",
+ "run": "fasttext_lem_d100_w5_m5_s0",
+ "vocab": 29949,
+ "train_seconds": 62.0
+}

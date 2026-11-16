@@ -1,0 +1,26 @@
+{
+ "protocol": "evalsan_raw",
+ "subset": "all",
+ "run": "sgns_lem_d100_w5_m5_s0",
+ "relatedness_test": {
+  "accuracy": 0.34234234234234234,
+  "macroF1": 0.24268569559870126,
+  "n": 4551,
+  "pairs_with_oov": 4128,
+  "both_oov_pairs": 2366
+ },
+ "synonym_mcq": {
+  "accuracy": 0.7777777777777778,
+  "n": 9
+ },
+ "cat_sem": {
+  "purity_best_of_6": 0.5194805194805194,
+  "n": 154,
+  "oov": 38
+ },
+ "cat_syn": {
+  "purity_best_of_6": 0.06296296296296296,
+  "n": 1080,
+  "oov": 1063
+ }
+}

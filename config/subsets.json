@@ -1,19 +1,55 @@
 {
-  "all": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    null
+ "_doc": "Corpus subsets. A value is either a list of DCS time slots (null = undated), or an object {\"slots\": [...], \"exclude_texts\": [...]} that also drops whole DCS texts by name. Each subset is built into data/corpora/<name>/ and results are keyed by subset, so dropping a subset leaves no trace.",
+ "all": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  null
+ ],
+ "vedic": [
+  1
+ ],
+ "classical": [
+  2,
+  3,
+  4,
+  5
+ ],
+ "all_noak": {
+  "slots": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   null
   ],
-  "vedic": [
-    1
-  ],
-  "classical": [
-    2,
-    3,
-    4,
-    5
+  "exclude_texts": [
+   "Amarakośa"
   ]
+ },
+ "all_nolex": {
+  "slots": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   null
+  ],
+  "exclude_texts": [
+   "Amarakośa",
+   "Rājanighaṇṭu",
+   "Dhanvantarinighaṇṭu",
+   "Madanapālanighaṇṭu",
+   "Aṣṭāṅganighaṇṭu",
+   "Abhidhānacintāmaṇi",
+   "Nighaṇṭuśeṣa",
+   "Kaiyadevanighaṇṭu",
+   "Bījanighaṇṭu"
+  ],
+  "_note": "Paramānandīyanāmamālā (36 sentences) not excluded: lexicon status unverified"
+ }
 }

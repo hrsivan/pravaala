@@ -1,0 +1,19 @@
+{
+ "subset": "all_nolex",
+ "view": "lem",
+ "model": "ppmi_svd",
+ "dim": "300",
+ "window": "5",
+ "min_count": "5",
+ "epochs": "5",
+ "glove_epochs": "25",
+ "workers": "2",
+ "seed": "0",
+ "corpora": "data/corpora",
+ "results": "results",
+ "evalsan": "None",
+ "amara": "None",
+ "run": "ppmi_svd_lem_d300_w5_m5_s0",
+ "vocab": 28977,
+ "train_seconds": 80.6
+}

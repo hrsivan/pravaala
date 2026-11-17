@@ -1,0 +1,26 @@
+{
+ "protocol": "evalsan",
+ "subset": "all_nolex+np",
+ "run": "sgns_seg_d100_w5_m5_s0",
+ "relatedness_test": {
+  "accuracy": 0.3606121091151031,
+  "macroF1": 0.276399260282634,
+  "n": 4509,
+  "pairs_with_oov": 2963,
+  "both_oov_pairs": 903
+ },
+ "synonym_mcq": {
+  "accuracy": 0.525096525096525,
+  "n": 259
+ },
+ "cat_sem": {
+  "purity_best_of_6": 0.3961038961038961,
+  "n": 154,
+  "oov": 47
+ },
+ "cat_syn": {
+  "purity_best_of_6": 0.1259259259259259,
+  "n": 1080,
+  "oov": 768
+ }
+}

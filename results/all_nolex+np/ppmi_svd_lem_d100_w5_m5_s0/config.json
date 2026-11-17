@@ -1,0 +1,19 @@
+{
+ "subset": "all_nolex+np",
+ "view": "lem",
+ "model": "ppmi_svd",
+ "dim": "100",
+ "window": "5",
+ "min_count": "5",
+ "epochs": "5",
+ "glove_epochs": "15",
+ "workers": "2",
+ "seed": "0",
+ "corpora": "data/corpora",
+ "results": "results",
+ "evalsan": "data/evalsan_clean",
+ "amara": "ext/amara-quiz/database/amara_pada.csv",
+ "run": "ppmi_svd_lem_d100_w5_m5_s0",
+ "vocab": 32705,
+ "train_seconds": 31.1
+}

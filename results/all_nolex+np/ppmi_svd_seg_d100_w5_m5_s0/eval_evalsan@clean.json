@@ -1,0 +1,26 @@
+{
+ "protocol": "evalsan",
+ "subset": "all_nolex+np",
+ "run": "ppmi_svd_seg_d100_w5_m5_s0",
+ "relatedness_test": {
+  "accuracy": 0.3694832557108006,
+  "macroF1": 0.3363506868872266,
+  "n": 4509,
+  "pairs_with_oov": 2963,
+  "both_oov_pairs": 903
+ },
+ "synonym_mcq": {
+  "accuracy": 0.5791505791505791,
+  "n": 259
+ },
+ "cat_sem": {
+  "purity_best_of_6": 0.4935064935064935,
+  "n": 154,
+  "oov": 47
+ },
+ "cat_syn": {
+  "purity_best_of_6": 0.15185185185185185,
+  "n": 1080,
+  "oov": 768
+ }
+}

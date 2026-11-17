@@ -1,0 +1,9 @@
+{
+  "_doc": "PROVISIONAL grouping of Amarakosa vargas for RQ2 (concrete vs abstract). Edit freely; analyse_vargas.py reads this file. nAnArTa and avyaya are excluded from clustering.",
+  "concrete": ["vArivargaH", "BUmivargaH", "puravargaH", "SElavargaH", "vanOzaDivargaH",
+               "siMhAdivargaH", "manuzyavargaH", "brahmavargaH", "kzatriyavargaH",
+               "vESyavargaH", "SUdravargaH", "pAtAlaBogivargaH"],
+  "abstract": ["kAlavargaH", "DIvargaH", "SabdAdivargaH", "nAwyavargaH",
+               "viSezyaniGnavargaH", "saNkIrRavargaH"],
+  "cosmological": ["svargavargaH", "vyomavargaH", "digvargaH", "narakavargaH"]
+}

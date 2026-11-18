@@ -1,0 +1,25 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Sū., 14, 23.1
+## chapter_id: 2168
+# text = nirdiśannāha visrāvyāṇītyādi
+# sent_id = 16862
+# sent_counter = 1
+# sent_subcounter = 
+1	nirdiśan	nirdiś	VERB	_	Case=Nom|Gender=Masc|Number=Sing|Tense=Pres|VerbForm=Part	_	_	_	LemmaId=161388|OccId=603289|Unsandhied=nirdiśan|UnsandhiedReconstructed=True
+2	visrāvyāṇi	visrāvay	VERB	_	Case=Acc|Gender=Neut|Number=Plur|VerbForm=Gdv	_	_	_	LemmaId=175429|OccId=608314|Unsandhied=visrāvyāṇi|UnsandhiedReconstructed=True
+
+# text = nirdiśannāha darśayannāha visrāvyāṇītyādi
+# sent_id = 16869
+# sent_counter = 1
+# sent_subcounter = 
+1	āha	ah	VERB	_	Tense=Past|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156124|OccId=605103|Unsandhied=āha
+2	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=608315|Unsandhied=ityādi|UnsandhiedReconstructed=True
+3	āha	ah	VERB	_	Tense=Past|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156124|OccId=2500922|Unsandhied=āha
+
+# text = aṣṭavidhaśastrakarmīye
+# sent_id = 16946
+# sent_counter = 2
+# sent_subcounter = 
+1	aṣṭavidhaśastrakarmīye	aṣṭavidhaśastrakarmīya	NOUN	_	Case=Loc|Gender=Masc|Number=Sing	_	_	_	LemmaId=175520|OccId=608366|Unsandhied=aṣṭavidhaśastrakarmīye|UnsandhiedReconstructed=True
+

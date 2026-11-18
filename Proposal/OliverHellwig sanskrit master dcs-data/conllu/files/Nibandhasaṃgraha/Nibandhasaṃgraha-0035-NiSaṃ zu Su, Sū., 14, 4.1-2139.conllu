@@ -1,0 +1,45 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Sū., 14, 4.1
+## chapter_id: 2139
+# text = sa khalvityādi
+# sent_id = 16880
+# sent_counter = 1
+# sent_subcounter = 
+1	khalu	khalu	PART	_		_	_	_	LemmaId=128848|OccId=604363|Unsandhied=khalu|UnsandhiedReconstructed=True
+2	saḥ	tad	PRON	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=37875|OccId=607249|Unsandhied=saḥ|UnsandhiedReconstructed=True
+
+# text = khalvityādi
+# sent_id = 16885
+# sent_counter = 1
+# sent_subcounter = 
+1	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=604364|Unsandhied=ityādi|UnsandhiedReconstructed=True
+
+# text = 'vasthitiṃ 'tra yakṛtplīhasthenaiva evānnarasa khalvāpyo rasaḥ āmagandhatā 'pyarthaḥ
+# sent_id = 16950
+# sent_counter = 2
+# sent_subcounter = 
+1-8	'tra	_	_	_	_	_	_	_	_
+1	api	api	PART	_		_	_	_	LemmaId=21365|OccId=604367|Unsandhied=api|UnsandhiedReconstructed=True
+2	yakṛt	yakṛt	NOUN	_	Case=Cpd	_	_	_	LemmaId=72780|OccId=604388|Unsandhied=yakṛt|UnsandhiedReconstructed=True
+3	atra	atra	ADV	_		_	_	_	LemmaId=7442|OccId=604903|Unsandhied=atra|UnsandhiedReconstructed=True
+4	khalu	khalu	PART	_		_	_	_	LemmaId=128848|OccId=605108|Unsandhied=khalu|UnsandhiedReconstructed=True
+5	avasthitim	avasthiti	NOUN	_	Case=Acc|Gender=Fem|Number=Sing	_	_	_	LemmaId=54723|OccId=605841|Unsandhied=avasthitim|UnsandhiedReconstructed=True
+6	rasaḥ	rasa	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=69571|OccId=607252|Unsandhied=rasaḥ|UnsandhiedReconstructed=True
+7	eva	eva	PART	_		_	_	_	LemmaId=39754|OccId=607657|Unsandhied=eva|UnsandhiedReconstructed=True
+8	āma	āma	ADJ	_	Case=Cpd	_	_	_	LemmaId=58923|OccId=1843676|Unsandhied=āma|UnsandhiedReconstructed=True
+
+# text = cetyatra 'pyarthaḥ
+# sent_id = 16961
+# sent_counter = 2
+# sent_subcounter = 
+1-2	'pyarthaḥ	_	_	_	_	_	_	_	_
+1	iti	iti	PART	_		_	_	_	LemmaId=63331|OccId=603492|Unsandhied=iti|UnsandhiedReconstructed=True
+2	arthaḥ	artha	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=53136|OccId=604368|Unsandhied=arthaḥ|UnsandhiedReconstructed=True
+
+# text = gacchati
+# sent_id = 17104
+# sent_counter = 3
+# sent_subcounter = 
+1	gacchati	gam	VERB	_	Tense=Pres|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156214|OccId=604375|Unsandhied=gacchati
+

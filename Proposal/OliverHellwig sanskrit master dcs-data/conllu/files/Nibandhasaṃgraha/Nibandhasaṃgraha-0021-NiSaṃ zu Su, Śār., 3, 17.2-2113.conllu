@@ -1,0 +1,13 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Śār., 3, 17.2
+## chapter_id: 2113
+# text = vardhamānaśarīradhātūnāṃ sthāpakam vikāraparimāṇaṃ deye
+# sent_id = 16915
+# sent_counter = 1
+# sent_subcounter = 
+1	dhātūnām	dhātu	NOUN	_	Case=Gen|Gender=Fem|Number=Plur	_	_	_	LemmaId=92416|OccId=601568|Unsandhied=dhātūnām|UnsandhiedReconstructed=True
+2	deye	dā	VERB	_	Case=Nom|Gender=Neut|Number=Dual|VerbForm=Gdv	_	_	_	LemmaId=157372|OccId=602890|Unsandhied=deye|UnsandhiedReconstructed=True
+3	vikāra	vikāra	NOUN	_	Case=Cpd	_	_	_	LemmaId=47808|OccId=811352|Unsandhied=vikāra|UnsandhiedReconstructed=True
+4	sthāpakam	sthāpaka	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=102919|OccId=5938996|Unsandhied=sthāpakam
+

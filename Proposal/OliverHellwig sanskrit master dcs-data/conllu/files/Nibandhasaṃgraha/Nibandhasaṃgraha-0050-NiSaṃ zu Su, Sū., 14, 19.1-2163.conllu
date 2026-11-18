@@ -1,0 +1,66 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Sū., 14, 19.1
+## chapter_id: 2163
+# text = rājasaṃdarśane ityādi
+# sent_id = 16897
+# sent_counter = 1
+# sent_subcounter = 
+1	rāja	rājan	NOUN	_	Case=Cpd	_	_	_	LemmaId=70467|OccId=603084|Unsandhied=rāja|UnsandhiedReconstructed=True
+2	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=607655|Unsandhied=ityādi|UnsandhiedReconstructed=True
+
+# text = dhātavaḥ karotītyarthaḥ
+# sent_id = 17018
+# sent_counter = 2
+# sent_subcounter = 
+1	karoti	kṛ	VERB	_	Tense=Pres|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156168|OccId=607672|Unsandhied=karoti
+2	dhātavaḥ	dhātu	NOUN	_	Case=Nom|Gender=Masc|Number=Plur	_	_	_	LemmaId=92416|OccId=607712|Unsandhied=dhātavaḥ|UnsandhiedReconstructed=True
+
+# text = karotītyarthaḥ
+# sent_id = 17021
+# sent_counter = 2
+# sent_subcounter = 
+1	iti	iti	PART	_		_	_	_	LemmaId=63331|OccId=607673|Unsandhied=iti|UnsandhiedReconstructed=True
+
+# text = prāṇamedhākāmaḥ karotītyarthaḥ
+# sent_id = 17022
+# sent_counter = 2
+# sent_subcounter = 
+1	arthaḥ	artha	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=53136|OccId=607674|Unsandhied=arthaḥ|UnsandhiedReconstructed=True
+2	kāmaḥ	kāma	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=13752|OccId=798833|Unsandhied=kāmaḥ|UnsandhiedReconstructed=True
+
+# text = gṛhyante svābhāvikāḥ iti saṃkaṭaṃ kalpate bījaṃ sātiśayo kadācid madhye mahataḥ anye paripakvaśarīratvāt
+# sent_id = 17075
+# sent_counter = 3
+# sent_subcounter = 
+1-12	iti	_	_	_	_	_	_	_	_
+1	kadācid	kadācid	ADV	_		_	_	_	LemmaId=167010|OccId=601382|Unsandhied=kadācid|UnsandhiedReconstructed=True
+2	madhye	madhya	NOUN	_	Case=Loc|Gender=Neut|Number=Sing	_	_	_	LemmaId=35810|OccId=601471|Unsandhied=madhye|UnsandhiedReconstructed=True
+3	bījam	bīja	NOUN	_	Case=Acc|Gender=Neut|Number=Sing	_	_	_	LemmaId=148966|OccId=601538|Unsandhied=bījam|UnsandhiedReconstructed=True
+4	paripakva	paripakva	ADJ	_	Case=Cpd	_	_	_	LemmaId=19184|OccId=607678|Unsandhied=paripakva|UnsandhiedReconstructed=True
+5	saṃkaṭam	saṃkaṭa	NOUN	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=8754|OccId=612480|Unsandhied=saṃkaṭam|UnsandhiedReconstructed=True
+6	iti	iti	PART	_		_	_	_	LemmaId=63331|OccId=612530|Unsandhied=iti|UnsandhiedReconstructed=True
+7	svābhāvikāḥ	svābhāvika	ADJ	_	Case=Nom|Gender=Masc|Number=Plur	_	_	_	LemmaId=121780|OccId=964510|Unsandhied=svābhāvikāḥ|UnsandhiedReconstructed=True
+8	gṛhyante	grah	VERB	_	Tense=Pres|Mood=Ind|Voice=Pass|Person=3|Number=Plur	_	_	_	LemmaId=156232|OccId=969851|Unsandhied=gṛhyante
+9	kalpate	kﾱp	VERB	_	Tense=Pres|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156176|OccId=1997025|Unsandhied=kalpate
+10	anye	anya	PRON	_	Case=Nom|Gender=Masc|Number=Plur	_	_	_	LemmaId=164189|OccId=2500732|Unsandhied=anye|UnsandhiedReconstructed=True
+11	mahataḥ	mahat	ADJ	_	Case=Gen|Gender=Masc|Number=Sing	_	_	_	LemmaId=37544|OccId=2501175|Unsandhied=mahataḥ|UnsandhiedReconstructed=True
+12	sa	sa	ADV	_		_	_	_	LemmaId=202954|OccId=3451396|Unsandhied=sa|UnsandhiedReconstructed=True
+
+# text = ityāha vedanāviśeṣaḥ ityāha sātiśayo paripakvaśarīratvāt
+# sent_id = 17082
+# sent_counter = 3
+# sent_subcounter = 
+1-5	ityāha	_	_	_	_	_	_	_	_
+1	śarīra	śarīra	NOUN	_	Case=Cpd	_	_	_	LemmaId=116860|OccId=607679|Unsandhied=śarīra|UnsandhiedReconstructed=True
+2	āha	ah	VERB	_	Tense=Past|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156124|OccId=804134|Unsandhied=āha
+3	viśeṣaḥ	viśeṣa	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=139220|OccId=807146|Unsandhied=viśeṣaḥ|UnsandhiedReconstructed=True
+4	āha	ah	VERB	_	Tense=Past|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156124|OccId=811715|Unsandhied=āha
+5	atiśayaḥ	atiśaya	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=7284|OccId=3451397|Unsandhied=atiśayaḥ|UnsandhiedReconstructed=True
+
+# text = paripakvaśarīratvāt
+# sent_id = 17087
+# sent_counter = 3
+# sent_subcounter = 
+1	tvāt	tva	NOUN	_	Case=Abl|Gender=Neut|Number=Sing	_	_	_	LemmaId=163754|OccId=607680|Unsandhied=tvāt|UnsandhiedReconstructed=True
+

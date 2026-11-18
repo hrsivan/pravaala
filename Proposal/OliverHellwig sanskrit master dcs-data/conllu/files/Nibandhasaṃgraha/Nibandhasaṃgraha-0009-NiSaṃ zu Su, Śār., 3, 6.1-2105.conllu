@@ -1,0 +1,75 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Śār., 3, 6.1
+## chapter_id: 2105
+# text = ūrdhvaṃ snehādikriyāntargate ṛtur vyādhīn niṣphalaḥ kathaṃ pratipādya sa snehādikriyāntargate vardhakaṃ pratipādayannāha ityādi
+# sent_id = 16912
+# sent_counter = 1
+# sent_subcounter = 
+1-11	snehādikriyāntargate	_	_	_	_	_	_	_	_
+1	ṛtuḥ	ṛtu	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=38726|OccId=601450|Unsandhied=ṛtuḥ|UnsandhiedReconstructed=True
+2	sneha	sneha	NOUN	_	Case=Cpd	_	_	_	LemmaId=103429|OccId=602884|Unsandhied=sneha|UnsandhiedReconstructed=True
+3	pratipādya	pratipāday	VERB	_	VerbForm=Conv	_	_	_	LemmaId=162524|OccId=603581|Unsandhied=pratipādya|UnsandhiedReconstructed=True
+4	saḥ	tad	PRON	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=37875|OccId=605837|Unsandhied=saḥ|UnsandhiedReconstructed=True
+5	niṣphalaḥ	niṣphala	ADJ	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=34674|OccId=607368|Unsandhied=niṣphalaḥ|UnsandhiedReconstructed=True
+6	katham	katham	ADV	_		_	_	_	LemmaId=1340|OccId=607475|Unsandhied=katham|UnsandhiedReconstructed=True
+7	vyādhīn	vyādhi	NOUN	_	Case=Acc|Gender=Masc|Number=Plur	_	_	_	LemmaId=119173|OccId=2501155|Unsandhied=vyādhīn|UnsandhiedReconstructed=True
+8	ūrdhvam	ūrdhvam	ADV	_		_	_	_	LemmaId=202659|OccId=3172064|Unsandhied=ūrdhvam|UnsandhiedReconstructed=True
+9	ādi	ādi	NOUN	_	Case=Cpd	_	_	_	LemmaId=57973|OccId=602885|Unsandhied=ādi|UnsandhiedReconstructed=True
+10	kriyā	kriyā	NOUN	_	Case=Cpd	_	_	_	LemmaId=133808|OccId=602886|Unsandhied=kriyā|UnsandhiedReconstructed=True
+11	antargate	antargam	VERB	_	Case=Nom|Gender=Neut|Number=Dual|VerbForm=Part	_	_	_	LemmaId=158251|OccId=602887|Unsandhied=antargate|UnsandhiedReconstructed=True
+12-14	vardhakaṃ	_	_	_	_	_	_	_	_
+12	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=601451|Unsandhied=ityādi|UnsandhiedReconstructed=True
+13	vardhakam	vardhaka	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=199002|OccId=798862|Unsandhied=vardhakam|UnsandhiedReconstructed=True
+14	pratipādayan	pratipāday	VERB	_	Case=Nom|Gender=Masc|Number=Sing|Tense=Pres|VerbForm=Part	_	_	_	LemmaId=162524|OccId=811350|Unsandhied=pratipādayan|UnsandhiedReconstructed=True
+
+# text = doṣotpādanenātmanaḥ ca viṃśatireva mukhasya bhavati
+# sent_id = 17014
+# sent_counter = 2
+# sent_subcounter = 
+1	bhavati	bhū	VERB	_	Tense=Pres|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=157250|OccId=601465|Unsandhied=bhavati
+2	mukhasya	mukha	NOUN	_	Case=Gen|Gender=Neut|Number=Sing	_	_	_	LemmaId=136827|OccId=601507|Unsandhied=mukhasya|UnsandhiedReconstructed=True
+3	doṣa	doṣa	NOUN	_	Case=Cpd	_	_	_	LemmaId=90071|OccId=778092|Unsandhied=doṣa|UnsandhiedReconstructed=True
+4	ca	ca	CONJ	_		_	_	_	LemmaId=157144|OccId=798830|Unsandhied=ca|UnsandhiedReconstructed=True
+5	viṃśatiḥ	viṃśati	NUM	_	Case=Nom|Gender=Fem|Number=Sing	_	_	_	LemmaId=47721|OccId=811370|Unsandhied=viṃśatiḥ|UnsandhiedReconstructed=True
+
+# text = nordhvamadho taddvayamapi kilaikāhenaiva pakṣāntaramāha utkṛṣṭaṃ bhavati aṣṭādaśa nirgataṃ vā gaṇanīyam
+# sent_id = 17115
+# sent_counter = 3
+# sent_subcounter = 
+1-4	vā	_	_	_	_	_	_	_	_
+1	api	api	PART	_		_	_	_	LemmaId=21365|OccId=603508|Unsandhied=api|UnsandhiedReconstructed=True
+2	āha	ah	VERB	_	Tense=Past|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156124|OccId=604046|Unsandhied=āha
+3	eva	eva	PART	_		_	_	_	LemmaId=39754|OccId=605871|Unsandhied=eva|UnsandhiedReconstructed=True
+4	adhas	adhas	ADV	_		_	_	_	LemmaId=7825|OccId=1997034|Unsandhied=adhas|UnsandhiedReconstructed=True
+5-10	gaṇanīyam	_	_	_	_	_	_	_	_
+5	bhavati	bhū	VERB	_	Tense=Pres|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=157250|OccId=778143|Unsandhied=bhavati
+6	aṣṭādaśa	aṣṭādaśan	NUM	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=60516|OccId=811392|Unsandhied=aṣṭādaśa|UnsandhiedReconstructed=True
+7	nirgatam	nirgam	VERB	_	Case=Nom|Gender=Neut|Number=Sing|VerbForm=Part	_	_	_	LemmaId=161374|OccId=969861|Unsandhied=nirgatam|UnsandhiedReconstructed=True
+8	vā	vā	CONJ	_		_	_	_	LemmaId=75765|OccId=1997035|Unsandhied=vā|UnsandhiedReconstructed=True
+9	utkṛṣṭam	utkṛṣṭa	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=55534|OccId=2076191|Unsandhied=utkṛṣṭam|UnsandhiedReconstructed=True
+10	gaṇanīyam	gaṇay	VERB	_	Case=Nom|Gender=Neut|Number=Sing|VerbForm=Gdv	_	_	_	LemmaId=157603|OccId=3139180|Unsandhied=gaṇanīyam|UnsandhiedReconstructed=True
+
+# text = tv aprāptābhilaṣitapadārthā sarvaṃ śleṣmā āhādṛṣṭetyādi
+# sent_id = 17140
+# sent_counter = 4
+# sent_subcounter = 
+1-5	aprāptābhilaṣitapadārthā	_	_	_	_	_	_	_	_
+1	sarvam	sarva	PRON	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=104444|OccId=600848|Unsandhied=sarvam|UnsandhiedReconstructed=True
+2	āha	ah	VERB	_	Tense=Past|Mood=Ind|Person=3|Number=Sing	_	_	_	LemmaId=156124|OccId=601482|Unsandhied=āha
+3	tu	tu	PART	_		_	_	_	LemmaId=82701|OccId=601579|Unsandhied=tu|UnsandhiedReconstructed=True
+4	śleṣmā	śleṣman	NOUN	_	Case=Nom|Gender=Masc|Number=Sing	_	_	_	LemmaId=41184|OccId=602899|Unsandhied=śleṣmā|UnsandhiedReconstructed=True
+5	a	a	PART	_		_	_	_	LemmaId=213048|OccId=5938992|Unsandhied=a
+
+# text = āhādṛṣṭetyādi
+# sent_id = 17147
+# sent_counter = 4
+# sent_subcounter = 
+1	adṛṣṭā	adṛṣṭa	ADJ	_	Case=Nom|Gender=Fem|Number=Sing	_	_	_	LemmaId=7607|OccId=601483|Unsandhied=adṛṣṭā|UnsandhiedReconstructed=True
+
+# text = āhādṛṣṭetyādi
+# sent_id = 17151
+# sent_counter = 4
+# sent_subcounter = 
+1	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=601484|Unsandhied=ityādi|UnsandhiedReconstructed=True
+

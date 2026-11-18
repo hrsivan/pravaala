@@ -1,0 +1,11 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Sū., 14, 29.1
+## chapter_id: 2184
+# text = atyuṣṇa ityādi
+# sent_id = 16840
+# sent_counter = 1
+# sent_subcounter = 
+1	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=612573|Unsandhied=ityādi|UnsandhiedReconstructed=True
+2	ati	ati	ADP	_		_	_	_	LemmaId=167215|OccId=3224461|Unsandhied=ati|UnsandhiedReconstructed=True
+

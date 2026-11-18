@@ -1,0 +1,23 @@
+## text: Nibandhasaṃgraha
+## text_id: 6
+## chapter: NiSaṃ zu Su, Śār., 3, 2.1
+## chapter_id: 2101
+# text = athetyādi
+# sent_id = 16892
+# sent_counter = 1
+# sent_subcounter = 
+1	atha	atha	ADV	_		_	_	_	LemmaId=7467|OccId=600812|Unsandhied=atha|UnsandhiedReconstructed=True
+
+# text = athetyādi
+# sent_id = 16902
+# sent_counter = 1
+# sent_subcounter = 
+1	ityādi	ityādi	ADJ	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=63350|OccId=600813|Unsandhied=ityādi|UnsandhiedReconstructed=True
+
+# text = caturañjalipramāṇaṃ dvijasamīpavartino chapratyayalukau
+# sent_id = 17027
+# sent_counter = 2
+# sent_subcounter = 
+1	pramāṇam	pramāṇa	NOUN	_	Case=Nom|Gender=Neut|Number=Sing	_	_	_	LemmaId=141016|OccId=601351|Unsandhied=pramāṇam|UnsandhiedReconstructed=True
+2	vartinaḥ	vartin	ADJ	_	Case=Nom|Gender=Masc|Number=Plur	_	_	_	LemmaId=74628|OccId=601513|Unsandhied=vartinaḥ|UnsandhiedReconstructed=True|WordSem=78728
+

@@ -1,0 +1,107 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- COMPACT PACKAGES & MARGINS ---
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% Tighten spacing for lists and sections
+\setlist{nosep, leftmargin=*}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{8pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
+\titlespacing{\subsection}{0pt}{6pt plus 2pt minus 2pt}{2pt plus 1pt minus 1pt}
+
+% --- COMPACT HEADER ---
+\author{\small \textbf{Sai Sreemayee Sistla, Vinayak Sharma} \\ \quad\quad \texttt{[saisreemayee.sistla@research.iiit.ac.in, vinayak.sharma@research.iiit.ac.in]}}
+\title{\vspace{-1.5em}\textbf{Project Proposals: M26CL3.202: Computational Linguistics 2}\vspace{-0.5em}}
+\date{\vspace{-1.5em}}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\section{Proposal:  Information-Theoretic Signatures of Sandhi Boundaries}
+
+\subsection{Research Question}
+Sandhi is the set of phonetic changes that occur at word or morpheme boundaries, where neighboring speech sounds assimilate, drop, or transform to facilitate smoother pronunciation. In Sanskrit, sandhi is governed by strict, highly formalized rules that combine sounds across word boundaries (external sandhi) or within compound words and roots (internal sandhi). It dictates how vowels and consonants merge or alter to maintain euphonic harmony throughout the spoken and written language.
+
+It is known that character-level predictability drops at word boundaries: the next symbol becomes harder to guess and its possible continuations multiply (Harris, 1955; Elman, 1990). Unsupervised segmenters exploit this through entropy (Jin & Tanaka-Ishii, 2006). Sanskrit sandhi rewrites the phonemes at the junction. We carry the approach employed in the paper in Assignment 1 to analyse information content in phonemes and boundaries.
+
+\begin{enumerate}
+    \item Under a phoneme n-gram model trained only on unsandhied Sanskrit, are surprisal and entropy higher at word boundaries than within words, in both unsandhied and sandhied text, and if so, by how much? Does there exist a relationship between entropy at word boundaries with and without sandhi?
+    \item How does the effect differ by sandhi class (vowel–vowel, consonant–vowel, consonant–consonant, visarga–vowel, visarga–consonant), and how sensitive is it to model order, measure, training regime and normalisation?
+    \item Can boundary scores prune the candidate split positions that a rule-based splitter (\texttt{sanskrit\_parser}) explores, and what does pruning cost in recall?
+\end{enumerate}
+
+A small pilot on DCS text already shows surprisal peaks at word junctions; this project tests that systematically.
+
+\subsection{Proposed Methods}
+\begin{itemize}
+    \item \textbf{Preparation:} Convert all text to SLP1, so that one symbol corresponds to one phoneme. Align every multiword token's surface form with unsandhied components to locate each boundary. Label class and record entropy.
+    \item \textbf{Models:} The models used are phoneme n-gram models (n = 2–6) with smoothing, trained on unsandhied DCS text.
+    \item \textbf{Measures:}  At each position, we will consider the surprisal of the next phoneme, \\ $−\log_2P(c_i | \text{preceding }n - 1\text{ phonemes})$; entropy $H(X | \text{context})$; and, from a space-aware model, the boundary probability $P(\text{space} | \text{context})$.
+    \item \textbf{Evaluation (RQ1):} Compare boundary and non-boundary positions for sandhied and unsandhied versions of the same sentences. Non-boundary positions control for the shift between unsandhied training and sandhied test text.
+    \item \textbf{Ablations (RQ2):} Rank sandhi classes by effect size; vary model order, running-text versus word-internal training, and normalisation.
+    \item \textbf{Application (RQ3):} \texttt{sanskrit\_parser} tries a sandhi split at every position of every suffix. We restrict it to the top-k positions, or those above a threshold, by boundary score, and report candidate splits generated, lexicon lookups, wall time, and recall of the gold split on held-out data, and analyse the revised time complexity of the task of rule-based sandhi splitting. 
+\end{itemize}
+
+\subsection{Datasets}
+\begin{itemize}
+    \item \textbf{Digital Corpus of Sanskrit:} (Hellwig), CoNLL-U release: surface text, multiword tokens and gold unsandhied forms.
+    \item \textbf{SandhiKosh:} (Bhardwaj et al., 2018), about 14 k word–split pairs, for the splitter evaluation.
+    \item \textbf{\texttt{sanskrit\_parser}:} (Madathil et al.; MIT licence), the rule-based baseline.
+\end{itemize}
+
+\vspace{1em}
+\hrule
+\vspace{2em}
+
+\\ \\ \\ \\ 
+
+
+
+\section{Proposal: Replicating a Simplified S³ Bayesian Sandhi Splitting}
+
+\subsection{Research Question}
+Rule-based Sanskrit sandhi splitters generate every valid split of a chunk and then rank them, and the number of candidates grows exponentially with chunk length. Natarajan & Charniak (2011) instead treat splitting as Bayesian word segmentation (Goldwater et al., 2006; 2009). A Dirichlet-process prior over morphs, realised as a Chinese Restaurant Process, favours a small lexicon of heavily reused morphs, and Gibbs sampling revises one boundary at a time. Their supervised variant reports F = 70.07, against 66.26 for the best earlier method. Their experiments use a consortium corpus and a 2006 morphological analyser.
+
+\begin{enumerate}
+    \item (Replication) Does a simplified S³ sampler (S^5) reach comparable precision, recall and F on the Digital Corpus of Sanskrit, and how does it compare with sanskrit\_parser's top-ranked split on the same sentences?
+    \item (Ablation) How much of the gain comes from the Bayesian model, and how much from linguistic knowledge such as a lexicon filter and training counts? The paper's own results suggest the latter dominates.
+\end{enumerate}
+
+\subsection{Proposed Methods}
+\begin{itemize}
+    \item \textbf{Data:} From DCS CoNLL-U, build pairs of sandhied chunks (multiword tokens and their surface strings) and gold analyses (unsandhied components), converted to SLP1. 
+    \item \textbf{Sampler:} Implement the CRP posterior and report the results of the iterations.
+    \item \textbf{Evaluation:} Precision, recall and F of segmentations, and of boundaries for finer error analysis, with mean and spread over the seeds. 
+\end{itemize}
+
+\subsection{Datasets}
+\begin{itemize}
+    \item \textbf{Digital Corpus of Sanskrit}
+    \item \textbf{SandhiKosh}
+    \item \textbf{\texttt{sanskrit\_parser}}
+\end{itemize}
+
+\section{References}
+
+\begin{enumerate}
+
+\item Harris, Z. S. (1955). From phoneme to morpheme. \textbf{Language} 31(2).
+\item Elman, J. L. (1990). Finding structure in time. \textbf{Cognitive Science} 14(2).
+\item Jin, Z. & Tanaka-Ishii, K. (2006). Unsupervised segmentation of Chinese text by use of branching entropy. \textbf{COLING/ACL}.
+\item Natarajan, A. & Charniak, E. (2011). S³ – Statistical Sandhi Splitting. \textbf{IJCNLP}.
+\item Hellwig, O. & Nehrdich, S. (2018). Sanskrit word segmentation using character-level recurrent and convolutional neural networks. \textbf{EMNLP}.
+\item Lau, J. H., Clark, A. & Lappin, S. (2017). Grammaticality, acceptability, and probability: A probabilistic view of linguistic knowledge. \textbf{Cognitive Science} 41(5).
+\item Goldwater, S., Griffiths, T. & Johnson, M. (2006). Contextual dependencies in unsupervised word segmentation. \textbf{COLING/ACL}.
+\item Goldwater, S., Griffiths, T. & Johnson, M. (2009). A Bayesian framework for word segmentation: Exploring the effects of context. \textbf{Cognition} 112(1).
+\item Kumar, A., Mittal, V. & Kulkarni, A. (2010). Sanskrit compound processor. \textbf{Sanskrit Computational Linguistics}, Springer.
+\item Krishnan, S. & Kulkarni, A. (2020). Sanskrit segmentation revisited. 
+
+\end{enumerate}
+
+\end{document}

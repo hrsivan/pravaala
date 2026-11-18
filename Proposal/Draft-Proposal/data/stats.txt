@@ -1,0 +1,5 @@
+chunks: 252
+multi-morph chunks: 72
+morph tokens: 381
+morph types: 280
+phoneme types: 44

@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,top=1.9cm,bottom=1.9cm,left=2.1cm,right=2.1cm]{geometry}
+\usepackage[T1]{fontspec}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing{\section}{0pt}{5pt}{2pt}
+\setlist[enumerate]{nosep,leftmargin=1.5em,topsep=2pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\renewcommand{\refname}{\normalsize References}
+
+\begin{document}
+
+\begin{center}
+{\large\bfseries Vidruma: From \textit{Varga} to Vector Space}\\[2pt]
+{\normalsize Sense-Disambiguated Distributional Semantics for Sanskrit\\ and the Computational Evaluation of a Traditional Lexical Ontology}\\[3pt]
+{\small Sai Sreemayee Sistla (2025114013), Vinayak Sharma (2025114002)}
+\end{center}
+
+\vspace{-4pt}
+
+\section{Introduction and Motivation}
+
+    Ideas echoing distributional semantics, and that words get meaning from their company and discourse-context have existed for long in the Indian grammatical tradition \cite{Harris} \cite{Firth} \cite{Bhartrhari} \cite{Anandavardhana} \cite{Matilal}.
+    Thesauri like the \textit{Amarako\'sa} have described and categorised words based on ontological principles into twenty-five \textit{varga}s.
+
+    Word-Embedding models have been developed for Sanskrit but report a high number of OOV tokens, upto 55\% \cite{Sandhan}.
+    We wish to investigate this and analyse the effect of ID-based lemmatisation on OOV rates.
+    To this end, we propose to construct Word-Embedding models, based on lemmatised Sanskrit corpora, and test them against existing benchmarks for Sanskrit Word-Embeddings.
+    
+    We also wish to compare how modern computational methods can add to the categorisation attempts of traditional lexicographers, and analyse clustering patterns that are encoded in word vectors.
+    Lastly, we plan to qualitatively analyse how lemmatisation improves word-sense disambiguation and detecting synonymy.
+
+    Thus, we plan to not only test modern approaches on traditional parameters via existing benchmarks, but also ask how patterns that exist in higher-dimensional vector spaces can complement age-old Sanskrit semantic studies.
+
+\section{Research Questions}
+
+    \begin{enumerate}
+        \item[\textbf{RQ1}] How does integrating lemmatisation into word-embeddings layers (such as GloVe and Word2Vec) \cite{Jurafsky} impact semantic categorisation metrics on low-resource Sanskrit benchmarks?
+        \item[\textbf{RQ2}] Do unsupervised clusters in the induced space recover \textit{Amarako\'sa varga}s, and what do systematic divergences indicate - unrecorded groupings, cross-\textit{varga} affinities, or limits of the distributional signal across concrete and abstract semantic domains?
+        \item[\textbf{RQ3}] How does lemmatisation informed from pragmatic context help resolve word-sense ambiguities between words that have the same lexical realisations? How much of the reported OOV rate for the benchmark is attributable to inflection rather than lexical sparsity?
+    \end{enumerate}
+
+\section{Methods}
+
+    We attempt to construct word-embeddings over DCS lemma IDs.
+    Preprocessing conditions (surface, transliteration-normalised, string-lemmatised, ID-lemmatised) are taken into account, isolated and measured towards their improvements to the metrics and contribution to the OOV rate.
+    Clusters are induced by $k$-means and agglomerative linkage and scored by purity against \textit{varga}s, with divergent cases inspected qualitatively.
+
+    Limitations of the cosine scale across embedding spaces will be taken into account. Wherever needed, additional rank statistics (Spearman $\rho$, pairwise AUC, etc), following critiques of similarity-based evaluation will be used \cite{Schnabel} \cite{Faruqui}.
+
+\section{Datasets and Benchmarking}
+
+    \begin{itemize}
+        \item The Digital Corpus of Sanskrit \cite{Hellwig} supplies lemmatised, sense-annotated text ($\approx$3.8M tokens in prior work \cite{Sandhan}).
+        \item The \textit{Amarako\'sa} is taken in the Hyderabad digitisation \cite{Nair}: 4{,}056 synsets across 25 \textit{varga}s.
+        \item EvalSan \cite{Sandhan} provides four intrinsic tasks with published baselines: relatedness (4{,}551 test pairs balanced over same-synset, same-\textit{varga} and unrelated), synonym detection (3{,}034 items), and semantic and syntactic categorisation (15 and 45 categories).
+        We benchmark against the reported results of \cite{Sandhan}.
+    \end{itemize}
+
+\begin{thebibliography}{99}\small
+\setlength{\itemsep}{0pt}
+
+\bibitem{Harris} Harris, Z. 1954. Distributional structure. \textit{Word} 10(2--3).
+\bibitem{Firth} Firth, J.R. 1957. A synopsis of linguistic theory, 1930--1955. \textit{Studies in Linguistic Analysis}.
+\bibitem{Sandhan} Sandhan, J., Adideva, O., Komal, D., Behera, L., Goyal, P. 2023. Evaluating neural word embeddings for Sanskrit. \textit{arXiv:2104.00270}; EvalSan toolkit.
+\bibitem{Nair} Nair, S., Kulkarni, A. 2010. The knowledge structure in \textit{Amarako\'sa}. \textit{Sanskrit Computational Linguistics}, LNCS 5406.
+\bibitem{Hellwig} Hellwig, O. 2010--2021. \textit{The Digital Corpus of Sanskrit (DCS)}.
+\bibitem{Bhartrhari} Bhart\d{r}hari. \textit{V\=akyapad\=iya}. Trans.\ K.A.S. Iyer, Deccan College, 1965--1974.
+\bibitem{Matilal} Matilal, B.K. 1990. \textit{The Word and the World: India's Contribution to the Study of Language}. Oxford University Press.
+\bibitem{Anandavardhana} \=Anandavardhana. \textit{Dhvany\=aloka}. Trans.\ D.H.H. Ingalls, J.M. Masson, M.V. Patwardhan, Harvard Oriental Series 49, 1990.
+\bibitem{Schnabel} Schnabel, T., Labutov, I., Mimno, D., Joachims, T. 2015. Evaluation methods for unsupervised word embeddings. \textit{EMNLP}.
+\bibitem{Faruqui} Faruqui, M., Tsvetkov, Y., Rastogi, P., Dyer, C. 2016. Problems with evaluation of word embeddings using word similarity tasks. \textit{RepEval@ACL}.
+\bibitem{Jurafsky} Jurafsky, D., Martin, J.H. \textit{Speech and Language Processing}, 3rd ed.\ draft, Ch.~6: Vector Semantics and Embeddings.
+
+\end{thebibliography}
+
+\end{document}

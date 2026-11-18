@@ -5,6 +5,31 @@ import scipy.sparse as sp
 
 from vidruma.embed import Space
 from vidruma.glove import train_glove
+from vidruma.plugins import compose
+
+
+def test_segmenter_prefers_low_surprisal_split():
+    lex = Counter({"jala": 500, "ja": 5, "laprAya": 5, "prAya": 300, "padma": 200,
+                   "ākara": 5, "Akara": 100})
+    seg = compose.Segmenter(lex, min_count=5)
+    best = seg.kbest("jalaprAya", 2)
+    assert best[0][1] == ("jala", "prAya")
+    # vowel sandhi: padma + Akara -> padmAkara
+    assert seg.kbest("padmAkara", 1)[0][1] == ("padma", "Akara")
+
+
+def test_candidates_flags_particles():
+    seg = compose.Segmenter(Counter({"akzi": 100, "iva": 1000}), min_count=5)
+    row = compose.candidates({"akzIva"}, seg)[0]
+    assert row["split"] == "akzi+iva" and row["status"] == "needs_review"
+
+
+def test_augment_does_not_modify_original():
+    X = np.eye(3)
+    s = Space(["a", "b", "c"], X.copy(), np.array([5.0, 5.0, 5.0]))
+    aug, added = compose.augment(s, {"ab": ["a", "b"], "zz": ["a", "q"]})
+    assert added == ["ab"] and "ab" not in s and "ab" in aug
+    assert np.isclose(aug.vec("ab") @ aug.vec("a"), 1 / np.sqrt(2))
 
 
 def test_glove_loss_decreases_and_shapes():

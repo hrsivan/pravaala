@@ -1,0 +1,42 @@
+{
+ "common_rel_n": 1188,
+ "common_mcq_n": 159,
+ "points": [
+  {
+   "fraction": 0.125,
+   "tokens": 713304,
+   "rho_common": 0.34140315500139107,
+   "auc20_common": 0.7321248360076698,
+   "mcq_common": 0.4968553459119497,
+   "rel_coverage": 0.2634730538922156,
+   "mcq_coverage": 0.054414784394250515
+  },
+  {
+   "fraction": 0.25,
+   "tokens": 1427237,
+   "rho_common": 0.40765867168863207,
+   "auc20_common": 0.7792347865576749,
+   "mcq_common": 0.5849056603773585,
+   "rel_coverage": 0.33754712796628966,
+   "mcq_coverage": 0.09000684462696783
+  },
+  {
+   "fraction": 0.5,
+   "tokens": 2856564,
+   "rho_common": 0.4809510055219491,
+   "auc20_common": 0.8290569179533758,
+   "mcq_common": 0.6163522012578616,
+   "rel_coverage": 0.4109558660456864,
+   "mcq_coverage": 0.13449691991786447
+  },
+  {
+   "fraction": 1.0,
+   "tokens": 5713132,
+   "rho_common": 0.49655265697083606,
+   "auc20_common": 0.8389973761227167,
+   "mcq_common": 0.6666666666666666,
+   "rel_coverage": 0.4845863827899756,
+   "mcq_coverage": 0.17796030116358658
+  }
+ ]
+}

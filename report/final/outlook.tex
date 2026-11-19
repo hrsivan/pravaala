@@ -1,0 +1,106 @@
+% Conclusion and outlook section for the FINAL report.
+% \input{outlook} inside the final report; citations live in refs_outlook.bib
+% (merge into the main .bib). Uses \vk{} and \code{} from the report preamble.
+
+\section{Outlook: a Sanskrit hub for other Indian languages}\label{sec:outlook}
+
+\paragraph{The idea.} Most Indian languages share a large Sanskrit-derived
+lexical layer, and the region shares many structural features. Indo-Aryan
+languages inherited Sanskrit vocabulary through the Prakrits
+(\emph{tadbhava}) and re-borrowed it in learned form (\emph{tatsama}).
+Dravidian, Munda and other families borrowed it too; the
+\emph{tatsama}/\emph{tadbhava} classification is applied to Sanskrit
+loanwords across all these families. Bengali, for instance, is estimated at % TODO source: figure from Wikipedia "Tatsama"; replace with a primary reference or drop
+about 40\% \emph{tatsama} vocabulary. Structurally, South Asia is a classic
+linguistic area \citep{emeneau1956india}: verb-final order, case relations
+close to Pāṇini's \emph{kāraka}s, and shared phonological features. This
+makes it attractive to treat Sanskrit, or a representation derived from it,
+as a \emph{meta-language} through which Indian languages can be related to
+one another.
+
+A note on terminology: for Dravidian languages Sanskrit is a source of
+borrowing (a superstratum or adstratum), not a substratum. A substratum is
+the language of an earlier population that influences an incoming one.
+Indeed, Dravidian is often proposed as a \emph{substratum} of Indo-Aryan,
+for example as the source of its retroflex consonants
+\citep{emeneau1956india}. The accurate phrase is a \emph{shared Sanskrit
+lexical stratum}: inherited in Indo-Aryan, borrowed elsewhere.
+
+\paragraph{Prior work.} The idea has a long history in Indian NLP. The
+Computational Pāṇinian Grammar framework \citep{bharati1995nlp} uses
+\emph{kāraka} relations as a near-interlingual layer. It underlies the
+Anusāraka language accessors and the Sampark consortium's system for
+translation between Indian languages, which covered 18 language pairs
+\citep{anthes2010automated}. Several systems use Sanskrit itself as an
+explicit interlingua, mostly in rule-based frameworks. On the statistical
+side, \citet{kunchukuttan2017utilizing} showed that subword-level pivot
+translation through a \emph{related} pivot language is highly competitive
+with direct translation, and that combining several related pivots can
+rival a direct model. On the lexical side, IndoWordNet links the wordnets
+of 18 Indian languages through shared synset identifiers, built by
+expansion from the Hindi WordNet as pivot \citep{bhattacharyya2010indowordnet}.
+
+\paragraph{What this project adds: a semantic hub, not a symbolic
+interlingua.} Translating \emph{through} Sanskrit text adds a lossy step
+and runs into Sanskrit's small corpus. A lighter and testable version of the
+idea uses our lemma- and sense-level Sanskrit space as the \emph{hub} of a
+star-shaped alignment of embedding spaces. Let $X_0\in\mathbb{R}^{n_0\times
+d}$ be the Sanskrit lemma space and $X_\ell$ the space of language
+$\ell=1,\dots,L$. A seed dictionary $D_\ell$ of \emph{tatsama} pairs is
+almost free to construct: after transliteration into one phonemic alphabet,
+a \emph{tatsama} is (nearly) string-identical to its Sanskrit lemma. The
+transliteration problem of \S\ref{sec:audit} returns here at the scale of
+a dozen scripts. The orthogonal map aligning language $\ell$ to the hub,
+\begin{align*}
+W_\ell&=\arg\min_{W^\top W=I}\big\|X_\ell[D_\ell]\,W-X_0[D_\ell]\big\|_F\\
+&=U_\ell V_\ell^\top,
+\end{align*}
+has the closed form given by the SVD $U_\ell\Sigma_\ell V_\ell^\top$ of
+$X_\ell[D_\ell]^\top X_0[D_\ell]$ \citep{schonemann1966generalized}. This is
+the standard tool for bilingual embedding alignment
+\citep{mikolov2013exploiting,smith2017offline,conneau2018word}. Because
+$W_\ell$ is orthogonal it is an isometry, so each language's internal
+cosine geometry is untouched. Language $\ell$ is mapped to language $m$ by
+$W_\ell W_m^\top$, so $L$ alignments serve all $L(L-1)$ directed pairs.
+
+\paragraph{Why the hub should be sense-level.} A shared lexical layer helps
+only to the extent that shared forms share meanings. Daughter languages
+select different senses of the same Sanskrit word. \emph{Śikṣā} is
+``education'' in Hindi but ``punishment'' in Telugu. \emph{Upanyāsa} (in
+Sanskrit roughly ``statement, introduction'') became ``novel'' in Hindi and
+``lecture'' in Telugu. These are cross-lingual versions of the within-lemma
+polysemy we measured (0.94 bits/token beyond lemma IDs on the sense-annotated
+DCS). The prediction follows directly from RQ1 and RQ3: a sense-level hub
+(\vk{lid}, \vk{sense}) should align better than a surface or lemma-string
+hub, and the alignment residual of a seed pair,
+$\|\mathbf{x}_\ell W_\ell-\mathbf{x}_0\|$, should flag semantically drifted
+\emph{tatsama}s, i.e.\ false friends. That gives a data-driven detector of
+cross-lingual semantic change. The Amarakośa adds a language-neutral concept
+inventory: its vargas and synsets could serve as a Sanskrit-anchored
+counterpart to IndoWordNet's Hindi-anchored synsets. This would be
+particularly natural for Dravidian languages, whose learned vocabulary
+borrowed from Sanskrit directly.
+
+\paragraph{Testable hypotheses.}
+\begin{enumerate}
+\item Alignment quality to the Sanskrit hub (precision@$k$ of word
+  translation) increases with a language's \emph{tatsama} share and with the
+  formality of the target-side corpus.
+\item A sense-level hub outperforms a lemma-string hub, which outperforms a
+  surface hub, on held-out \emph{tatsama} and non-\emph{tatsama} pairs.
+\item Pairs with large alignment residuals are enriched for documented false
+  friends.
+\end{enumerate}
+
+\paragraph{Limits.} The shared layer is concentrated in learned and formal
+registers. Colloquial language, the core grammatical vocabulary of Dravidian
+languages, and Persian- and English-derived vocabulary fall outside it.
+Tamil in particular uses far less \emph{tatsama} vocabulary than Telugu,
+Kannada or Malayalam. Structural similarity is largely an areal phenomenon,
+not inheritance, so it supports a shared \emph{framework} (as in
+Computational Pāṇinian Grammar) rather than translation through Sanskrit
+itself. Finally, modern multilingual neural translation already pools
+related languages implicitly. The case for a Sanskrit hub is therefore
+strongest where data are scarcest: low-resource language pairs,
+interpretable lexical alignment, and the study of how a shared lexicon has
+diverged in meaning.

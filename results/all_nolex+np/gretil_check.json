@@ -1,0 +1,495 @@
+{
+ "summary": {
+  "files_used": 3359,
+  "files_skipped_not_iast": 4,
+  "gretil_tokens": 25845571,
+  "gretil_types": 3176773,
+  "dcs_lem_tokens": 5713132,
+  "bands": {
+   "absent": {
+    "n_words": 1450,
+    "reach5": 0.314,
+    "reach20": 0.147,
+    "median_new": 2
+   },
+   "rare (1-4)": {
+    "n_words": 828,
+    "reach5": 0.702,
+    "reach20": 0.284,
+    "median_new": 7
+   },
+   "covered (5+)": {
+    "n_words": 4200,
+    "reach5": 1.0,
+    "reach20": 0.928,
+    "median_new": 108
+   }
+  },
+  "proj_rel_cov": 0.693,
+  "proj_mcq_cov": 0.415,
+  "now_rel_cov": 0.485,
+  "now_mcq_cov": 0.178
+ },
+ "absent_top": {
+  "cet": {
+   "dcs": 0,
+   "gretil": 20137,
+   "n_forms": 15,
+   "new": 20137
+  },
+  "om": {
+   "dcs": 0,
+   "gretil": 8470,
+   "n_forms": 2,
+   "new": 8470
+  },
+  "paramam": {
+   "dcs": 0,
+   "gretil": 5450,
+   "n_forms": 22,
+   "new": 5450
+  },
+  "nApi": {
+   "dcs": 0,
+   "gretil": 4138,
+   "n_forms": 6,
+   "new": 4138
+  },
+  "muhus": {
+   "dcs": 0,
+   "gretil": 3782,
+   "n_forms": 32,
+   "new": 3782
+  },
+  "samantatas": {
+   "dcs": 0,
+   "gretil": 3439,
+   "n_forms": 41,
+   "new": 3439
+  },
+  "bARA": {
+   "dcs": 0,
+   "gretil": 3382,
+   "n_forms": 42,
+   "new": 3382
+  },
+  "kadAcit": {
+   "dcs": 0,
+   "gretil": 3226,
+   "n_forms": 22,
+   "new": 3226
+  },
+  "miTaH": {
+   "dcs": 0,
+   "gretil": 1727,
+   "n_forms": 7,
+   "new": 1727
+  },
+  "patra": {
+   "dcs": 0,
+   "gretil": 1563,
+   "n_forms": 38,
+   "new": 1563
+  },
+  "yugapat": {
+   "dcs": 0,
+   "gretil": 1502,
+   "n_forms": 44,
+   "new": 1502
+  },
+  "samAsAdya": {
+   "dcs": 0,
+   "gretil": 1464,
+   "n_forms": 48,
+   "new": 1464
+  },
+  "prAjYA": {
+   "dcs": 0,
+   "gretil": 1333,
+   "n_forms": 37,
+   "new": 1333
+  },
+  "nir": {
+   "dcs": 0,
+   "gretil": 1163,
+   "n_forms": 14,
+   "new": 1163
+  },
+  "agrataH": {
+   "dcs": 0,
+   "gretil": 1133,
+   "n_forms": 7,
+   "new": 1133
+  },
+  "kowI": {
+   "dcs": 0,
+   "gretil": 1124,
+   "n_forms": 31,
+   "new": 1124
+  },
+  "KarA": {
+   "dcs": 0,
+   "gretil": 1094,
+   "n_forms": 40,
+   "new": 1094
+  },
+  "dizwyA": {
+   "dcs": 0,
+   "gretil": 1071,
+   "n_forms": 65,
+   "new": 1071
+  },
+  "vArI": {
+   "dcs": 0,
+   "gretil": 1021,
+   "n_forms": 50,
+   "new": 1021
+  },
+  "pretya": {
+   "dcs": 0,
+   "gretil": 991,
+   "n_forms": 48,
+   "new": 991
+  },
+  "DIran": {
+   "dcs": 0,
+   "gretil": 894,
+   "n_forms": 67,
+   "new": 894
+  },
+  "svit": {
+   "dcs": 0,
+   "gretil": 840,
+   "n_forms": 22,
+   "new": 840
+  },
+  "brahmavAdin": {
+   "dcs": 0,
+   "gretil": 804,
+   "n_forms": 49,
+   "new": 804
+  },
+  "tUzRIM": {
+   "dcs": 0,
+   "gretil": 770,
+   "n_forms": 1,
+   "new": 770
+  },
+  "satra": {
+   "dcs": 0,
+   "gretil": 755,
+   "n_forms": 38,
+   "new": 755
+  },
+  "naktam": {
+   "dcs": 0,
+   "gretil": 742,
+   "n_forms": 22,
+   "new": 742
+  },
+  "Catra": {
+   "dcs": 0,
+   "gretil": 718,
+   "n_forms": 38,
+   "new": 718
+  },
+  "svajana": {
+   "dcs": 0,
+   "gretil": 625,
+   "n_forms": 38,
+   "new": 625
+  },
+  "mAtApitf": {
+   "dcs": 0,
+   "gretil": 623,
+   "n_forms": 56,
+   "new": 623
+  },
+  "varti": {
+   "dcs": 0,
+   "gretil": 623,
+   "n_forms": 44,
+   "new": 623
+  },
+  "upADyAyA": {
+   "dcs": 0,
+   "gretil": 576,
+   "n_forms": 65,
+   "new": 576
+  },
+  "CatrA": {
+   "dcs": 0,
+   "gretil": 567,
+   "n_forms": 40,
+   "new": 567
+  },
+  "vArtA": {
+   "dcs": 0,
+   "gretil": 567,
+   "n_forms": 37,
+   "new": 567
+  },
+  "paRyA": {
+   "dcs": 0,
+   "gretil": 536,
+   "n_forms": 65,
+   "new": 536
+  },
+  "nizkalA": {
+   "dcs": 0,
+   "gretil": 534,
+   "n_forms": 36,
+   "new": 534
+  },
+  "sumana": {
+   "dcs": 0,
+   "gretil": 513,
+   "n_forms": 38,
+   "new": 513
+  },
+  "vArta": {
+   "dcs": 0,
+   "gretil": 484,
+   "n_forms": 37,
+   "new": 484
+  },
+  "aryA": {
+   "dcs": 0,
+   "gretil": 480,
+   "n_forms": 65,
+   "new": 480
+  },
+  "pratyak": {
+   "dcs": 0,
+   "gretil": 475,
+   "n_forms": 18,
+   "new": 475
+  },
+  "pitarO": {
+   "dcs": 0,
+   "gretil": 462,
+   "n_forms": 1,
+   "new": 462
+  }
+ },
+ "absent_unattested_sample": [
+  "sTOrin",
+  "bramhI",
+  "zaRqatAyogya",
+  "kaqamba",
+  "dviguRAkfta",
+  "pAdANgada",
+  "nazwacezwatA",
+  "vArDUzika",
+  "akfzRakarman",
+  "sarvaDurAvaha",
+  "dozEkadfS",
+  "mfgadaMSaka",
+  "tIkzRaganDaka",
+  "uccErGuzwa",
+  "kuWara",
+  "saYjYu",
+  "avyaktarAga",
+  "SUlAkfta",
+  "vaRigBAva",
+  "pARivAda",
+  "gorda",
+  "arkAhva",
+  "balisadman",
+  "SAkaSAkawa",
+  "rAmBa",
+  "halipriyA",
+  "BekI",
+  "Sigruja",
+  "sIhuRqa",
+  "kAmbavika",
+  "akzAgrakIlaka",
+  "sAndrasnigDa",
+  "karRajalOkA",
+  "pAlaGna",
+  "caRqAlavallakI",
+  "vfttADyayanardDi",
+  "vyAqAyuDa",
+  "ijyASIla",
+  "aDiSrayaRI",
+  "jAtApatyA"
+ ],
+ "paradigm_examples": {
+  "jala": [
+   "jalA",
+   "jalAH",
+   "jalAM",
+   "jalAS",
+   "jalAc",
+   "jalAd",
+   "jalAj",
+   "jalAl",
+   "jalAm",
+   "jalAn",
+   "jalAnAM",
+   "jalAnAm",
+   "jalAni",
+   "jalAr",
+   "jalAs",
+   "jalAt",
+   "jalAz",
+   "jalE",
+   "jalEH",
+   "jalES",
+   "jalEr",
+   "jalEs",
+   "jalEz",
+   "jalO",
+   "jala",
+   "jalaH",
+   "jalaM",
+   "jalaS",
+   "jalam",
+   "jalar",
+   "jalas",
+   "jalasya",
+   "jalaz",
+   "jale",
+   "jalena",
+   "jalezu",
+   "jalo"
+  ],
+  "agni": [
+   "agnI",
+   "agnIn",
+   "agnInAM",
+   "agnInAm",
+   "agnO",
+   "agnaya",
+   "agnayaH",
+   "agnayaS",
+   "agnayar",
+   "agnayas",
+   "agnayaz",
+   "agnaye",
+   "agnayo",
+   "agne",
+   "agneH",
+   "agneS",
+   "agner",
+   "agnes",
+   "agnez",
+   "agni",
+   "agniBi",
+   "agniBiH",
+   "agniBiS",
+   "agniBir",
+   "agniBis",
+   "agniBiz",
+   "agniH",
+   "agniM",
+   "agniS",
+   "agnim",
+   "agninA",
+   "agnir",
+   "agnis",
+   "agniz",
+   "agnizu"
+  ],
+  "nadI": [
+   "nadAya",
+   "nadI",
+   "nadIBi",
+   "nadIBiH",
+   "nadIBiS",
+   "nadIBir",
+   "nadIBis",
+   "nadIBiz",
+   "nadIH",
+   "nadIM",
+   "nadIS",
+   "nadIm",
+   "nadInAM",
+   "nadInAm",
+   "nadIr",
+   "nadIs",
+   "nadIz",
+   "nadIzu",
+   "nadayac",
+   "nadayad",
+   "nadayaj",
+   "nadayal",
+   "nadayan",
+   "nadayat",
+   "nadi",
+   "nadihi",
+   "nadyA",
+   "nadyAH",
+   "nadyAM",
+   "nadyAS",
+   "nadyAm",
+   "nadyAr",
+   "nadyAs",
+   "nadyAz",
+   "nadya",
+   "nadyaH",
+   "nadyaS",
+   "nadyar",
+   "nadyas",
+   "nadyaz",
+   "nadyo"
+  ],
+  "Bogin": [
+   "BogI",
+   "Bogi",
+   "BogiBi",
+   "BogiBiH",
+   "BogiBiS",
+   "BogiBir",
+   "BogiBis",
+   "BogiBiz",
+   "BogiRA",
+   "BogiRAM",
+   "BogiRAm",
+   "BogiRI",
+   "BogiRIM",
+   "BogiRIm",
+   "BogiRa",
+   "BogiRaH",
+   "BogiRaM",
+   "BogiRaS",
+   "BogiRam",
+   "BogiRar",
+   "BogiRas",
+   "BogiRaz",
+   "BogiRe",
+   "BogiRo",
+   "Bogin",
+   "BoginA",
+   "BoginAM",
+   "BoginAm",
+   "BoginI",
+   "BoginIM",
+   "BoginIm",
+   "BoginO",
+   "Bogina",
+   "BoginaH",
+   "BoginaM",
+   "BoginaS",
+   "Boginam",
+   "Boginar",
+   "Boginas",
+   "Boginaz",
+   "Bogine",
+   "Bogini",
+   "Bogino",
+   "BoginoH",
+   "BoginoS",
+   "Boginor",
+   "Boginos",
+   "Boginoz",
+   "Bogizu"
+  ]
+ },
+ "skipped": [
+  "acknowledgements.htm",
+  "navigat.htm",
+  "navigat0.htm",
+  "stopwords.htm"
+ ]
+}

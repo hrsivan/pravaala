@@ -133,8 +133,21 @@ class Space:
     # set when the corpus was built with an orthographic profile (e.g. nasal
     # canonicalisation), so benchmark words get exactly the same treatment.
     canon = None
+    # Optional spelling-variant fallback for OOV lookups (normalise.Respeller);
+    # enable with use_respelling(). Off by default.
+    respell = None
+
+    def use_respelling(self):
+        from .normalise import Respeller
+        self.respell = Respeller({k: float(self.counts[ids].sum()) for k, ids in self.senses.items()
+                                  if ids})
+        return self
+
     def _k(self, s):
-        return self.canon(s) if self.canon else s
+        k = self.canon(s) if self.canon else s
+        if self.respell is not None and k not in self.senses:
+            k = self.respell(k) or k
+        return k
 
     def __contains__(self, s):
         return self._k(s) in self.senses

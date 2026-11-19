@@ -156,3 +156,70 @@ class CompoundLexicon:
     def fuse(self, a: str, b: str) -> bool:
         return self.pairs.get((a, b), 0) >= self.min_count and self.npmi(a, b) >= self.theta
 
+
+# ------------------------------------------------------- spelling variants
+# Used only at *lookup* time, only for benchmark words that are otherwise OOV,
+# to bridge citation and orthographic conventions between a benchmark and
+# the DCS. Each rule is an optional alternation of the grammar or a
+# citation convention, never a change of word:
+#   final stops   A. 8.2.39 jhalAM jaSo 'nte (final d) with 8.4.56 vA 'vasAne
+#                 (optional voiceless in pausa): kadAcit ~ kadAcid
+#   final -s/-r   A. 8.3.15 kharavasAnayor visarjanIyaH (visarga in pausa):
+#                 miTaH ~ miTas, punaH ~ punar
+#   final -m      A. 8.3.23 mo 'nusvAraH: om ~ oM
+#   citation form nominative singular vs stem: BogI ~ Bogin, rAjA ~ rAjan,
+#                 mAtA ~ mAtf; adverbial accusative vs stem: naktam ~ nakta
+#   gemination    A. 8.4.46 aco rahAByAM dve, 8.4.47 anaci ca (optional
+#                 doubling after r, and before a non-vowel), 6.1.73 che ca
+#                 (cC for C after a short vowel): patra ~ pattra, Catra ~ Cattra
+_FINAL = {"t": "d", "d": "t", "k": "g", "g": "k", "w": "q", "q": "w", "p": "b", "b": "p",
+          "H": ["s", "r"], "s": "H", "r": "H", "m": "M", "M": "m"}
+_STOP = "kKgGcCjJwWqQtTdDpPbB"
+_VOWEL = "aAiIuUfFxXeEoO"
+# optional doubling only: after r (8.4.46), or before a non-vowel (8.4.47).
+# Intervocalic doubling is lexical (kuwwaka vs kuwaka, ap+pati) and is kept.
+_GEM = re.compile(rf"(?<=r)([{_STOP}])\1|([{_STOP}])\2(?=[^{_VOWEL}]|$)")
+
+
+def gemination_key(w: str) -> str:
+    """Spelling with the optional geminations of A. 8.4.46-47 removed, and
+    cC -> C (6.1.73)."""
+    return _GEM.sub(lambda m: m.group(1) or m.group(2), w.replace("cC", "C"))
+
+
+def spelling_variants(w: str) -> list[str]:
+    """Candidate respellings of w, most conservative first (gemination is
+    handled separately, through gemination_key, since it needs the vocabulary)."""
+    out = []
+    if len(w) < 2:
+        return out
+    f = _FINAL.get(w[-1], [])
+    out += [w[:-1] + x for x in ([f] if isinstance(f, str) else f)]
+    if w.endswith("I"):
+        out.append(w[:-1] + "in")
+    if w.endswith("A") and len(w) > 3:
+        out += [w[:-1] + "an", w[:-1] + "f"]
+    if w.endswith("am") and len(w) > 4:
+        out.append(w[:-1])
+    return out
+
+
+class Respeller:
+    """Map an OOV word to an in-vocabulary spelling variant, if exactly one
+    rule applies (ties broken by corpus frequency)."""
+
+    def __init__(self, vocab_counts: dict[str, float]):
+        self.counts = vocab_counts
+        self.by_key: dict[str, str] = {}
+        for w, c in vocab_counts.items():
+            k = gemination_key(w)
+            if k not in self.by_key or c > vocab_counts[self.by_key[k]]:
+                self.by_key[k] = w
+
+    def __call__(self, w: str) -> str | None:
+        if w in self.counts:
+            return w
+        for v in spelling_variants(w):
+            if v in self.counts:
+                return v
+        return self.by_key.get(gemination_key(w))

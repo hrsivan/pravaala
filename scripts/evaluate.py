@@ -50,6 +50,9 @@ ap.add_argument("--lookup", default="maxsim", choices=["maxsim", "maxfreq", "mea
 ap.add_argument("--n_perm", type=int, default=200)
 ap.add_argument("--bench_tag", default="", help="suffix for result files when --evalsan is not the "
                 "original EvalSan, e.g. 'clean' -> eval_ours@clean.json")
+ap.add_argument("--respell", action="store_true",
+                help="map OOV benchmark words to in-vocabulary spelling variants "
+                     "(normalise.Respeller); result files get a '+spell' suffix")
 a = ap.parse_args()
 
 space = Space.load(a.run / "vectors.npz")
@@ -58,7 +61,9 @@ profile = subset.split("+", 1)[1] if "+" in subset else ""
 if "n" in profile:          # corpus orthography -> apply the same rule to benchmark words
     from vidruma.normalise import canon_nasal
     space.canon = canon_nasal
-TAG = f"@{a.bench_tag}" if a.bench_tag else ""
+if a.respell:                # OOV benchmark words -> in-vocabulary spelling variant
+    space.use_respelling()
+TAG = ("+spell" if a.respell else "") + (f"@{a.bench_tag}" if a.bench_tag else "")
 how_vec = "maxfreq" if a.lookup == "maxsim" else a.lookup
 
 

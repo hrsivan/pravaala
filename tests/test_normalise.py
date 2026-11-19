@@ -34,3 +34,27 @@ def test_compound_lexicon_fuses_only_associated_pairs():
     for x in ["a", "b", "c", "d", "e", "f", "g", "h"]:
         lx.add("sarva", x); lx.add(x, "jana")
     assert lx.fuse("mahat", "rAja") and not lx.fuse("sarva", "a")
+
+
+def test_respeller_bridges_conventions():
+    from vidruma.normalise import Respeller
+    r = Respeller({"kadAcid": 10, "Bogin": 5, "pattra": 7, "Cattra": 3, "oM": 9, "jala": 50})
+    assert r("kadAcit") == "kadAcid" and r("BogI") == "Bogin" and r("om") == "oM"
+    assert r("patra") == "pattra" and r("Catra") == "Cattra"
+    assert r("jala") == "jala" and r("nadI") is None
+
+
+def test_space_respelling_is_off_by_default():
+    import numpy as np
+    from vidruma.embed import Space
+    sp = Space(["kadAcid", "jala"], np.eye(2), np.array([3.0, 4.0]))
+    assert "kadAcit" not in sp
+    sp.use_respelling()
+    assert "kadAcit" in sp and sp.sim("kadAcit", "kadAcid") == 1.0
+
+
+def test_gemination_only_in_optional_contexts():
+    from vidruma.normalise import gemination_key as g
+    assert g("pattra") == g("patra") and g("vArtta") == g("vArta") and g("Cattra") == g("Catra")
+    assert g("mUrcCita") == g("mUrCita")
+    assert g("kuwwaka") != g("kuwaka") and g("appati") != g("apati")

@@ -1,0 +1,13 @@
+{
+ "share_cells_r1": 0.6163166331098383,
+ "share_r1_in_top1pct_ppmi": 0.6362476955324898,
+ "share_r1_in_top10pct_ppmi": 0.709684303304202,
+ "share_r1_in_top50pct_ppmi": 0.6805675550698786,
+ "beta_partners_vs_freq": 0.8229474924464525,
+ "row_ppmi_mass_from_r1_by_freq": {
+  "5-20": 0.764,
+  "20-100": 0.718,
+  "100-1000": 0.627,
+  "1000-inf": 0.443
+ }
+}

@@ -231,7 +231,174 @@ together). \S\ref{sec:limits} shows the same effect at scale.
 %==========================================================================
 \section{Decisions and results}\label{sec:results}
 %==========================================================================
-In progress: decision log, test results, comparison with Sandhan et al.
+\paragraph{Setting.} Leak-free corpus, profile \vk{np}, cleaned benchmark,
+respelling on; $d=100$, window $\pm5$, minimum count 5, one seed. word2vec
+and FastText: 5 epochs, 5 negatives; GloVe: the reference implementation,
+50 iterations, $x_{\max}=10$; PPMI-SVD: context smoothing $\alpha=0.75$,
+eigenvalue weight $p=0.5$.
+
+\subsection{Decision log (dev)}\label{sec:decisions}
+Table~\ref{tab:decisions} lists every design decision with its dev
+evidence. Three are worth comment. Removing the lexicons \emph{lowers} dev
+scores (PPMI-SVD $\rho$ 0.578 $\to$ 0.516, synonyms 74.9 $\to$ 68.2\%): that
+drop is the leak, so we remove them for validity. Several standard
+improvements gave nothing: PMI shift, adding context vectors, removing
+principal components \citep{mu2018allbutthetop}, dependency contexts from the
+parsed part of DCS, and PMI smoothing by absolute discounting or the
+Kneser--Ney continuation probability \citep{kneser1995improved}. For the
+latter, a diagnostic explains why: pairs seen once are 62\% of PPMI cells
+but no more frequent among the top 1\%, and the continuation count grows as
+$\#(c)^{0.82}$, close to the $\alpha=0.75$ already used. Training word2vec longer helps it on dev; the test grid below still uses
+5 epochs, and the final grid will use 15. Finally, lowering the minimum
+count to 2 adds 8 points of coverage at unchanged quality on
+the old items; we keep 5 until the silver data (\S\ref{sec:next}) changes
+the counts.
+
+\begin{table*}[t]\centering\small
+\input{tables/decisions.tex}
+\caption{Decision log. Dev data, options compared on their common support
+($\rho$ / synonym accuracy). Lexicon and profile rows: $d=300$ without
+respelling; settings, technique, word2vec, smoothing and minimum-count rows:
+$d=300$; others: the main setting.}
+\label{tab:decisions}
+\end{table*}
+
+\subsection{Test results (RQ1)}
+Table~\ref{tab:main} gives each run on its own coverage, and
+Table~\ref{tab:rq1} the same runs on their common support (1,496 pairs, 231
+synonym items), with exact McNemar tests on synonyms, Holm-corrected over
+the eight tests.
+
+\begin{table*}[t]\centering\small
+\setlength{\tabcolsep}{4.5pt}
+\input{tables/main.tex}
+\caption{Test results (cleaned benchmark), each run on its own coverage
+(\%). Relatedness: Spearman $\rho$, AUC same-synset vs.\ unrelated
+(AUC$_{20}$) and same-varga vs.\ unrelated (AUC$_{10}$), 3-way macro-F1 with
+dev-tuned thresholds. Synonyms: accuracy (chance 25\%). Cat.: EvalSan
+semantic categorisation; Varga: $k$-means ($k=22$) against the Amarakośa
+vargas (permutation null 0.018). word2vec and FastText are mean-centred
+(chosen on dev).}
+\label{tab:main}
+\end{table*}
+
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{2.2pt}
+\input{tables/rq1.tex}
+\caption{Common support: $\rho$, synonym accuracy (\%), and Holm-adjusted
+McNemar $p$ for \vk{seg}$\to$\vk{lem} and \vk{lem}$\to$\vk{lid}.}
+\label{tab:rq1}
+\end{table}
+
+\paragraph{Lemmatisation helps.} For every model, \vk{lem} beats \vk{seg} on
+relatedness and synonyms, on the common support as well as on each model's
+own coverage, which grows from 34\% to 49\%. On synonyms the gain is
+significant for PPMI-SVD (34 vs.\ 12 discordant items, $p_{\mathrm{Holm}}=0.011$)
+and GloVe ($p_{\mathrm{Holm}}=0.003$), and suggestive for FastText (0.063),
+whose character $n$-grams already share evidence across inflected forms.
+
+\paragraph{Lemma IDs do not.} \vk{lid} and \vk{lem} are indistinguishable for
+every model (all $p_{\mathrm{Holm}}\ge0.32$), consistent with the small
+homography that IDs resolve (\S\ref{sec:prelim}).
+
+\paragraph{Models.} PPMI-SVD is best on every task ($\rho=0.50$,
+AUC$_{20}=0.85$, synonyms 64.0\%, categorisation NMI 0.77); word2vec and
+FastText follow, with GloVe last. Our own GloVe implementation, used
+earlier, stayed near chance ($\rho=0.03$), so all GloVe numbers come from the
+reference code. That the count-based model wins at 5.7M words agrees with
+\citet{levy2015improving}.
+
+\subsection{Comparison with Sandhan et al.}
+Table~\ref{tab:compare} scores our models with EvalSan's own protocol and
+original (converted) files. Our static models exceed all published static
+models on relatedness F1, semantic categorisation and synonyms. The fair
+synonym comparison is FastText with subword vectors, which answers 3,024 of
+the 3,034 items, as their models do: 54.0\% against 37.9\% for their
+FastText and 42.1\% for their best model (ELMo). We lose on syntactic
+categorisation, which clusters inflected forms by grammatical category:
+lemmatisation discards exactly that, and character-level ELMo does not.
+Their corpus included the lexicons, so the leak favours them.
+
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\input{tables/compare.tex}
+\caption{EvalSan's protocol and original files. S\&al.: published numbers
+\citep[Table~3]{sandhan2023evalsan}. Ours: leak-free corpus, \vk{lem}
+(syntactic categorisation: \vk{seg}). Their protocol skips synonym items with
+an OOV word; ``items'' is the number scored.}
+\label{tab:compare}
+\end{table}
+
+\subsection{What limits the scores}\label{sec:limits}
+\paragraph{The benchmark.} Same-synset pairs are well separated from
+unrelated ones (AUC$_{20}=0.85$), but same-varga pairs hardly are
+(AUC$_{10}=0.59$): even thresholds tuned on test give a 3-way F1 of only
+about 0.53. As in the running example, a varga mixes syntagmatic with
+paradigmatic relations. In the synonym task, 80\% of distractors come from
+the question's own varga.
+\paragraph{The data.} Training PPMI-SVD on nested halves of the corpus, each
+doubling adds about 7.4 points of relatedness coverage, and synonym accuracy
+on fixed items rises from 49.7\% (0.7M words) to 66.7\% (5.7M); $\rho$ is
+flattening (0.48 $\to$ 0.50 over the last doubling). More text, not
+technique, is the main lever, mostly through coverage.
+
+\subsection{Preliminary results for RQ2 and RQ3}\label{sec:prelim}
+\paragraph{RQ2.} All models recover the vargas far above chance (NMI
+0.09--0.23 against a null of 0.018). Recovery differs strongly between
+vargas: measured by bias-corrected specific information (bits a word's varga
+tells about its cluster), plants, intellect, animals and mountains are
+recovered best, and warfare, the underworld, humans and crafts worst. The
+concrete--abstract contrast we expected does not explain this (wrong sign in
+7 of 9 runs), nor do topical spread or context entropy ($|\rho|\le0.27$
+over 22 vargas, low power).
+
+\paragraph{RQ3.} On the relatedness test words (full DCS, original files,
+$\tau=5$), the naive OOV rate of 89.7\% splits into 14.1 points of encoding,
+30.0 of sandhi and 10.5 of inflection; ID splitting adds back 0.8; 36.0 are
+rare or absent even as lemmas. Sandhi thus matters more than inflection. The
+ambiguity resolved is small: $H(\vk{lem}\mid\vk{seg})=0.10$ and
+$H(\vk{lid}\mid\vk{lem})=0.11$ bits/token, while lemmatisation discards 2.40
+bits/token of morphology. Where DCS labels senses, $H(\vk{sense}\mid
+\vk{lid})=0.94$ bits/token: most ambiguity is polysemy \emph{within} a
+lemma ID (\emph{agni}: fire and the god), which ID-lemmatisation cannot
+resolve, a principled reason for the RQ1 null on \vk{lid}.
+
+%==========================================================================
+\section{Work under way and remaining}\label{sec:next}
+%==========================================================================
+\paragraph{Under way: more data.} The Göttingen Register of Electronic Texts in
+Indian Languages \citep{gretil} holds 19.2M raw words of Sanskrit. After removing
+lexicons (including six filed outside its lexicography section), quotations
+of them in commentaries, texts already in DCS and repeated editions, 9.95M
+words remain. They are being segmented, lemmatised and tagged with
+ByT5-Sanskrit \citep{nehrdich2024byt5}, which was trained on DCS, so its
+conventions match ours. A count of each benchmark word's inflected forms in
+this text projects relatedness coverage at 69\% (now 49\%) and synonym
+coverage at 42\% (now 19\%). Silver and gold data pass through the same
+normalisation code and will be reported separately and combined.
+
+\paragraph{Remaining.}
+\begin{itemize}
+\item Final grid on gold+silver data: 3 seeds, $d\in\{100,300\}$, the
+  minimum count revisited, paired tests on the common support.
+\item RQ2 at the word level (statistical power), and a qualitative analysis
+  of cross-varga clusters \citep{agirre2009study}.
+\item RQ3: a homograph subset (\vk{lem} vs.\ \vk{lid} where it matters), and
+  sense-level vectors on \vk{sense}.
+\item A small human ceiling study for the 3-way relatedness task.
+\end{itemize}
+\paragraph{Planned improvements.} Subword vectors for OOV words (FastText,
+already measured above); composing unattested compounds from their members,
+whose 2,448 machine-proposed splits await our review; and retrofitting to a
+lexical resource independent of the Amarakośa, reported separately.
+
+%==========================================================================
+\section*{Limitations}
+Test results come from one seed and $d=100$. EvalSan is derived from the
+Amarakośa, so relatedness and varga labels are not independent evidence.
+EvalSan's released vectors are no longer downloadable, so our encoding
+finding rests on its files, code, paper and saved notebook outputs. The
+participle-stem rule is validated for past participles only.
 
 \bibliography{refs}
 

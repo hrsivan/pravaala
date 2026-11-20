@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrrrrrr}
+\toprule
+ & \multicolumn{3}{c}{$\rho$} & \multicolumn{3}{c}{Synonym acc.} & \multicolumn{2}{c}{$p_{\mathrm{Holm}}$}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
+ & \vk{seg} & \vk{lem} & \vk{lid} & \vk{seg} & \vk{lem} & \vk{lid} & s$\to$l & l$\to$i\\
+\midrule
+word2vec & 0.37 & 0.49 & 0.47 & 58.4 & 64.9 & 60.2 & 0.267 & 0.32 \\
+FastText & 0.37 & 0.47 & 0.47 & 57.1 & 65.8 & 67.1 & 0.063 & 1.00 \\
+GloVe & 0.18 & 0.35 & 0.33 & 42.4 & 56.7 & 51.9 & 0.003 & 0.53 \\
+PPMI-SVD & 0.46 & 0.54 & 0.53 & 58.4 & 68.0 & 66.7 & 0.011 & 1.00 \\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,20 @@
+\begin{tabular}{lrrrrr}
+\toprule
+ & Rel. & \multicolumn{2}{c}{Cat.\ purity} & \multicolumn{2}{c}{Synonyms}\\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+model & F1 & sem & syn & acc & items\\
+\midrule
+\multicolumn{6}{l}{\textit{Sandhan et al.\ (published)}}\\
+word2vec & 30.9 & 0.41 & 0.22 & 37.3 & all \\
+GloVe & 31.5 & 0.39 & 0.25 & 37.4 & all \\
+FastText & 31.2 & 0.47 & 0.14 & 37.9 & all \\
+ELMo & 37.2 & 0.41 & 0.86 & 42.1 & all \\
+\midrule
+\multicolumn{6}{l}{\textit{Ours (leak-free corpus)}}\\
+word2vec & 35.2 & 0.53 & 0.13 & 56.5 & 559 \\
+FastText & 33.6 & 0.39 & 0.20 & 59.2 & 559 \\
+GloVe & 28.1 & 0.43 & 0.11 & 51.2 & 559 \\
+PPMI-SVD & 34.9 & 0.56 & 0.15 & 62.8 & 559 \\
+FastText + subw. &  &  &  & 54.0 & 3024 \\
+\bottomrule
+\end{tabular}

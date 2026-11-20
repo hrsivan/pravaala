@@ -11,8 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma.dcs import VIEWS, compound_pairs, iter_corpus, load_time_slots, view  # noqa: E402
-from vidruma.normalise import CompoundLexicon  # noqa: E402
+from pravaala.dcs import VIEWS, compound_pairs, iter_corpus, load_time_slots, view  # noqa: E402
+from pravaala.normalise import CompoundLexicon  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("conllu", type=Path, help=".../dcs/data/conllu")
@@ -21,7 +21,7 @@ ap.add_argument("--subset", default="all")
 ap.add_argument("--config", type=Path, default=ROOT / "config" / "subsets.json")
 ap.add_argument("--limit", type=int, default=0, help="max sentences (debug)")
 ap.add_argument("--profile", default="", help="normalisation flags: n (nasal), p (participle stems), "
-                "c (lexicalised compounds); see src/vidruma/normalise.py")
+                "c (lexicalised compounds); see src/pravaala/normalise.py")
 ap.add_argument("--cpd_min_count", type=int, default=10)
 ap.add_argument("--cpd_theta", type=float, default=0.5)
 a = ap.parse_args()

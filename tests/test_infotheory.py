@@ -1,8 +1,8 @@
 import numpy as np
 import scipy.sparse as sp
 
-from vidruma.evaluate import auc, purity
-from vidruma.infotheory import (conditional_entropy, entropy, mutual_information,
+from pravaala.evaluate import auc, purity
+from pravaala.infotheory import (conditional_entropy, entropy, mutual_information,
                                 nmi, ppmi_matrix, surprisal_keep_prob,
                                 variation_of_information)
 
@@ -67,7 +67,7 @@ def test_subsampling_matches_word2vec():
 
 def test_discount_is_count_dependent_shift():
     import numpy as np, scipy.sparse as sp
-    from vidruma.infotheory import ppmi_matrix, ney_discount
+    from pravaala.infotheory import ppmi_matrix, ney_discount
     R = sp.csr_matrix(np.array([[0, 1, 4], [1, 0, 2], [4, 2, 0]], float))
     C = R * 0.5                                   # weighted counts, same support
     P0 = ppmi_matrix(C, alpha=1.0).toarray()
@@ -82,7 +82,7 @@ def test_discount_is_count_dependent_shift():
 
 def test_continuation_marginal_counts_partners():
     import numpy as np, scipy.sparse as sp
-    from vidruma.infotheory import ppmi_matrix
+    from pravaala.infotheory import ppmi_matrix
     # context 0: 3 distinct partners once each; context 1: one partner 3 times
     C = sp.csr_matrix(np.array([[1, 3], [1, 0], [1, 0]], float))
     M = ppmi_matrix(C, ctx="cont").toarray()

@@ -25,9 +25,9 @@ from scipy.sparse.linalg import svds
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import benchmarks as bm, embed, evaluate as ev  # noqa: E402
-from vidruma.infotheory import ney_discount, ppmi_matrix  # noqa: E402
-from vidruma.normalise import canon_nasal  # noqa: E402
+from pravaala import benchmarks as bm, embed, evaluate as ev  # noqa: E402
+from pravaala.infotheory import ney_discount, ppmi_matrix  # noqa: E402
+from pravaala.normalise import canon_nasal  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--subset", default="all_nolex+np")

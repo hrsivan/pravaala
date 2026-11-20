@@ -30,7 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma.dcs import norm_word  # noqa: E402
+from pravaala.dcs import norm_word  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--silver", type=Path, default=ROOT / "data" / "silver" / "gretil")

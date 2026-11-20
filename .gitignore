@@ -12,7 +12,7 @@ wheels/
 # DS_Store
 **/.DS_Store
 
-# Vidruma: large or generated files, rebuilt by scripts (see README, "Large files")
+# Pravaala: large or generated files, rebuilt by scripts (see README, "Large files")
 ext/
 data/corpora/
 data/silver/gretil/
@@ -33,3 +33,4 @@ report/**/*.log
 report/**/*.out
 report/**/*.bbl
 report/**/*.blg
+report/**/*.toc

@@ -1,4 +1,4 @@
-from vidruma.normalise import CompoundLexicon, canon_nasal, join, participle_stem
+from pravaala.normalise import CompoundLexicon, canon_nasal, join, participle_stem
 
 
 def test_participle_stems():
@@ -37,7 +37,7 @@ def test_compound_lexicon_fuses_only_associated_pairs():
 
 
 def test_respeller_bridges_conventions():
-    from vidruma.normalise import Respeller
+    from pravaala.normalise import Respeller
     r = Respeller({"kadAcid": 10, "Bogin": 5, "pattra": 7, "Cattra": 3, "oM": 9, "jala": 50})
     assert r("kadAcit") == "kadAcid" and r("BogI") == "Bogin" and r("om") == "oM"
     assert r("patra") == "pattra" and r("Catra") == "Cattra"
@@ -46,7 +46,7 @@ def test_respeller_bridges_conventions():
 
 def test_space_respelling_is_off_by_default():
     import numpy as np
-    from vidruma.embed import Space
+    from pravaala.embed import Space
     sp = Space(["kadAcid", "jala"], np.eye(2), np.array([3.0, 4.0]))
     assert "kadAcit" not in sp
     sp.use_respelling()
@@ -54,7 +54,7 @@ def test_space_respelling_is_off_by_default():
 
 
 def test_gemination_only_in_optional_contexts():
-    from vidruma.normalise import gemination_key as g
+    from pravaala.normalise import gemination_key as g
     assert g("pattra") == g("patra") and g("vArtta") == g("vArta") and g("Cattra") == g("Catra")
     assert g("mUrcCita") == g("mUrCita")
     assert g("kuwwaka") != g("kuwaka") and g("appati") != g("apati")

@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_silver_conversion_matches_gold_treatment(tmp_path):
-    from vidruma.dcs import norm_word
+    from pravaala.dcs import norm_word
     silver = tmp_path / "silver"; (silver / "annotated").mkdir(parents=True)
     (silver / "units.tsv").write_text("uid\tfile\tiast\n"
                                       "g0\tx.htm\tagniṃ dīpe gataḥ\n"

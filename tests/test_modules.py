@@ -3,8 +3,8 @@ from collections import Counter
 import numpy as np
 import scipy.sparse as sp
 
-from vidruma.embed import Space
-from vidruma.plugins import compose
+from pravaala.embed import Space
+from pravaala.plugins import compose
 
 
 def test_segmenter_prefers_low_surprisal_split():

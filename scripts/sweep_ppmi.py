@@ -15,9 +15,9 @@ from scipy.sparse.linalg import svds
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import paths  # noqa: E402
-from vidruma import benchmarks as bm, embed, evaluate as ev  # noqa: E402
-from vidruma.infotheory import ppmi_matrix  # noqa: E402
+from pravaala import paths  # noqa: E402
+from pravaala import benchmarks as bm, embed, evaluate as ev  # noqa: E402
+from pravaala.infotheory import ppmi_matrix  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--subset", default="all")
@@ -32,7 +32,7 @@ a = ap.parse_args()
 corpus = ROOT / "data" / "corpora" / a.subset / f"{a.view}.txt"
 sents = lambda: (l.split() for l in open(corpus, encoding="utf-8"))
 vocab, counts = embed.build_vocab(sents, 5)
-from vidruma.normalise import canon_nasal  # noqa: E402
+from pravaala.normalise import canon_nasal  # noqa: E402
 CANON = canon_nasal if "n" in (a.subset.split("+", 1)[1] if "+" in a.subset else "") else None
 dev, test = bm.load_relatedness(a.evalsan, "dev"), bm.load_relatedness(a.evalsan, "test")
 mcq = bm.load_synonym_mcq(a.evalsan)

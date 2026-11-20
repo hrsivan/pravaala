@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np, scipy.sparse as sp
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma.infotheory import ppmi_matrix  # noqa: E402
+from pravaala.infotheory import ppmi_matrix  # noqa: E402
 ap = argparse.ArgumentParser(); ap.add_argument("--subset", default="all_nolex+np")
 ap.add_argument("--file", default="lem_w10_m5.npz"); a = ap.parse_args()
 z = np.load(ROOT / "results" / a.subset / "cooc_cache" / a.file)
@@ -25,7 +25,7 @@ for q in (0.99, 0.9, 0.5):
 f = np.asarray(C.sum(0)).ravel(); k = np.diff(sp.csc_matrix(R).indptr)
 m = (f > 0) & (k > 0)
 out["beta_partners_vs_freq"] = float(np.polyfit(np.log(f[m]), np.log(k[m]), 1)[0])
-from vidruma import embed  # noqa: E402
+from pravaala import embed  # noqa: E402
 corpus = ROOT / "data" / "corpora" / a.subset / (a.file.split("_")[0] + ".txt")
 _, wf = embed.build_vocab(lambda: (l.split() for l in open(corpus, encoding="utf-8")),
                           int(a.file.rsplit("_m", 1)[1].split(".")[0]))   # token counts, vocab order

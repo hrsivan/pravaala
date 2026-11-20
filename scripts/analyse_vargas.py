@@ -34,9 +34,9 @@ from scipy.stats import spearmanr
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import benchmarks as bm  # noqa: E402
-from vidruma import embed  # noqa: E402
-from vidruma.infotheory import entropy  # noqa: E402
+from pravaala import benchmarks as bm  # noqa: E402
+from pravaala import embed  # noqa: E402
+from pravaala.infotheory import entropy  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("run", type=Path)
@@ -51,7 +51,7 @@ a = ap.parse_args()
 subset = a.run.parent.name
 _prof = subset.split("+", 1)[1] if "+" in subset else ""
 if "n" in _prof:
-    from vidruma.normalise import canon_nasal as _canon
+    from pravaala.normalise import canon_nasal as _canon
 else:
     _canon = lambda w: w
 lab = json.load(open(a.run / f"items_{a.protocol}.json"))["ak_varga_kmeans"]

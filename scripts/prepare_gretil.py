@@ -37,7 +37,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma.translit import iast_to_slp1  # noqa: E402
+from pravaala.translit import iast_to_slp1  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--gretil", type=Path, required=True)

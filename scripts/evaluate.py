@@ -11,11 +11,11 @@ so any protocol or plugin can be dropped by not selecting / deleting its files.
 
 Protocols
   ours          OOV excluded + coverage; rank statistics; dev-tuned thresholds;
-                permutation nulls (vidruma.evaluate)
+                permutation nulls (pravaala.evaluate)
   ours+center   as `ours`, after mean-centring the space (removes the common
                 direction behind anisotropy; Mu & Viswanath 2018 without PC removal)
   ours+subword  as `ours`, plus FastText subword vectors for unseen strings
-  evalsan       EvalSan-faithful (vidruma.evalsan_compat), scheme-normalised
+  evalsan       EvalSan-faithful (pravaala.evalsan_compat), scheme-normalised
   evalsan_raw   EvalSan-faithful with the original, unconverted WX words
 Plugins
   compose       `ours` on a space augmented with composed vectors for words
@@ -30,9 +30,9 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import benchmarks as bm  # noqa: E402
-from vidruma import evaluate as ev  # noqa: E402
-from vidruma.embed import Space  # noqa: E402
+from pravaala import benchmarks as bm  # noqa: E402
+from pravaala import evaluate as ev  # noqa: E402
+from pravaala.embed import Space  # noqa: E402
 
 EXCL = {"nAnArTavargaH", "avyayavargaH"}   # polysemous / indeclinable vargas
 
@@ -59,7 +59,7 @@ space = Space.load(a.run / "vectors.npz")
 subset = a.run.parent.name
 profile = subset.split("+", 1)[1] if "+" in subset else ""
 if "n" in profile:          # corpus orthography -> apply the same rule to benchmark words
-    from vidruma.normalise import canon_nasal
+    from pravaala.normalise import canon_nasal
     space.canon = canon_nasal
 if a.respell:                # OOV benchmark words -> in-vocabulary spelling variant
     space.use_respelling()
@@ -130,7 +130,7 @@ for p in a.protocols:
         aug.canon = space.canon
         dump(p, *ours(aug, p))
     else:
-        from vidruma import evalsan_compat as ec
+        from pravaala import evalsan_compat as ec
         scheme = "raw" if p == "evalsan_raw" else "auto"
         R = {"relatedness_test": ec.relatedness(space, bm.load_relatedness(a.evalsan, "test", scheme), how_vec),
              "synonym_mcq": ec.synonym_mcq(space, bm.load_synonym_mcq(a.evalsan, scheme), how_vec),
@@ -139,7 +139,7 @@ for p in a.protocols:
         dump(p, R)
 
 if "compose" in a.plugins:
-    from vidruma.plugins import compose
+    from pravaala.plugins import compose
     tsv = a.compose_tsv or ROOT / "data" / "compose" / subset / "candidates.tsv"
     acc = compose.read_accepted(tsv, tuple(a.compose_accept.split(",")))
     aug, added = compose.augment(space, acc)

@@ -20,9 +20,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import benchmarks as bm, evaluate as ev  # noqa: E402
-from vidruma.embed import Space  # noqa: E402
-from vidruma.normalise import canon_nasal  # noqa: E402
+from pravaala import benchmarks as bm, evaluate as ev  # noqa: E402
+from pravaala.embed import Space  # noqa: E402
+from pravaala.normalise import canon_nasal  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--subset", default="all_nolex+np")

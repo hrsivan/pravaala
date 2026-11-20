@@ -8,10 +8,10 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from vidruma import benchmarks as bm  # noqa: E402
-from vidruma.infotheory import (conditional_entropy, entropy,  # noqa: E402
+from pravaala import benchmarks as bm  # noqa: E402
+from pravaala.infotheory import (conditional_entropy, entropy,  # noqa: E402
                                 good_turing_unseen)
-from vidruma.oov import decompose, string_counts  # noqa: E402
+from pravaala.oov import decompose, string_counts  # noqa: E402
 
 corp, evdir, amara = map(Path, sys.argv[1:4])
 VIEWS = ("surf", "seg", "lem", "lid", "sense")

@@ -1,7 +1,7 @@
 [project]
 name = "project"
 version = "0.1.0"
-description = "Vidruma: sense-disambiguated distributional semantics for Sanskrit (DCS, EvalSan, Amarakosa)"
+description = "Pravaala: sense-disambiguated distributional semantics for Sanskrit (DCS, EvalSan, Amarakosa)"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

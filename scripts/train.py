@@ -12,8 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import paths  # noqa: E402
-from vidruma import embed  # noqa: E402
+from pravaala import paths  # noqa: E402
+from pravaala import embed  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--subset", default="all")
@@ -48,7 +48,7 @@ if a.model in ("sgns", "fasttext"):
     if a.model == "fasttext" and a.evalsan and a.amara:
         # subword vectors for benchmark strings unseen in training; stored
         # separately so evaluation can include or exclude them (`ours+subword`)
-        from vidruma import benchmarks as bm
+        from pravaala import benchmarks as bm
         import numpy as np
         B = {w for x, y, _ in bm.load_relatedness(a.evalsan, "test") for w in (x, y)}
         B |= {w for x, y, _ in bm.load_relatedness(a.evalsan, "dev") for w in (x, y)}
@@ -59,7 +59,7 @@ if a.model in ("sgns", "fasttext"):
         np.savez_compressed(out / "subword_oov.npz", words=np.array(oov),
                             X=np.stack([kv[w] for w in oov]).astype(np.float32))
 elif a.model == "glove_ref":
-    from vidruma.glove import train_glove_reference
+    from pravaala.glove import train_glove_reference
     words, X, counts = train_glove_reference(corpus, a.glove_bin, a.dim, a.window, a.min_count,
                                              epochs=a.glove_epochs, threads=a.workers,
                                              seed=a.seed, workdir=out / "glove_work")

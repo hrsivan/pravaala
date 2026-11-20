@@ -1,7 +1,7 @@
 # Silver annotation on Kaggle
 
 Notebook: `notebooks/silver_annotate_kaggle.ipynb` (two T4 GPUs, one model copy each).
-Input: `vidruma_silver_shards.zip` (91 shards, 1.8M units of GRETIL, from `scripts/prepare_gretil.py`).
+Input: `pravaala_silver_shards.zip` (91 shards, 1.8M units of GRETIL, from `scripts/prepare_gretil.py`).
 
 ## One-time setup
 
@@ -9,12 +9,12 @@ Input: `vidruma_silver_shards.zip` (91 shards, 1.8M units of GRETIL, from `scrip
    Kaggle requires it for GPUs and for internet access in notebooks; the notebook needs
    internet to download the model from Hugging Face.
 2. **Upload the shards as a private dataset**: kaggle.com → Datasets → New Dataset →
-   drop in `vidruma_silver_shards.zip` → title `vidruma-silver-shards` → keep it Private → Create.
+   drop in `pravaala_silver_shards.zip` → title `pravaala-silver-shards` → keep it Private → Create.
    Kaggle unzips it; the notebook finds the shards wherever they end up.
 3. **Import the notebook**: kaggle.com → Code → New Notebook → File → Import Notebook →
    upload `silver_annotate_kaggle.ipynb`.
 4. In the notebook's right-hand panel:
-   * **Add Input** → Your Work → Datasets → `vidruma-silver-shards`;
+   * **Add Input** → Your Work → Datasets → `pravaala-silver-shards`;
    * Session options → **Accelerator: GPU T4 x2**;
    * Session options → **Internet: On**.
 
@@ -36,7 +36,7 @@ Input: `vidruma_silver_shards.zip` (91 shards, 1.8M units of GRETIL, from `scrip
    * the version's Output tab → **New Dataset** (creates a dataset from the output), then
      attach that dataset; or
    * upload the downloaded `annotated.zip` as a new version of a private dataset
-     `vidruma-silver-annotated` and attach that.
+     `pravaala-silver-annotated` and attach that.
    The notebook picks up any `shard_*.tsv` under its inputs, so all three routes work, and
    repeated units are skipped. Each new version's output then holds everything so far.
 9. Repeat 6–8. The weekly GPU quota (about 30 h, shown in your profile settings, resetting

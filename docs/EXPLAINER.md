@@ -1,4 +1,4 @@
-# Vidruma — how the project works
+# Pravaala — how the project works
 
 This document explains the project end to end: what each stage does, why, the
 mathematics behind it, and where it lives in the code. Every concept is
@@ -122,9 +122,9 @@ and early classical (Mahābhārata, Rāmāyaṇa, Caraka, Aṣṭādhyāyī), an
 are later classical, Purāṇic, medieval and commentarial. This gives the
 corpus subsets `vedic` (1.31M words) and `classical` (4.49M words).
 
-**Code.** `dcs.read_conllu` (`src/vidruma/dcs.py:64`),
+**Code.** `dcs.read_conllu` (`src/pravaala/dcs.py:64`),
 `dcs.load_time_slots` (`dcs.py:106`), `benchmarks.load_amarakosa`
-(`src/vidruma/benchmarks.py:79`), `config/subsets.json`.
+(`src/pravaala/benchmarks.py:79`), `config/subsets.json`.
 
 ---
 
@@ -167,7 +167,7 @@ How we detect the scheme: the letter `z` (ṣ in SLP1) never occurs in WX, and
 `x` (dental d in WX, very common) is near-absent in SLP1 (ḷ). The relative
 frequencies of `x` and `z` decide.
 
-**Code.** `translit.wx_to_slp1` (`src/vidruma/translit.py:42`),
+**Code.** `translit.wx_to_slp1` (`src/pravaala/translit.py:42`),
 `iast_to_slp1` (`translit.py:75`), `deva_to_slp1` (`translit.py:120`),
 `detect_scheme` (`translit.py:147`); per-file auto-detection in
 `benchmarks._converter` (`benchmarks.py:33`). Tests:
@@ -247,7 +247,7 @@ the sparsity, and lemmatising removes most of what is left.
 
 **Code.** `dcs.view` (`dcs.py:142`), `dcs.strip_id` (`dcs.py:161`);
 `scripts/build_corpora.py` writes `data/corpora/<subset>/<view>.txt`;
-`infotheory.conditional_entropy` (`src/vidruma/infotheory.py:45`),
+`infotheory.conditional_entropy` (`src/pravaala/infotheory.py:45`),
 `good_turing_unseen` (`infotheory.py:75`); numbers produced by
 `scripts/oov_report.py` (ambiguity block at line 37).
 
@@ -300,7 +300,7 @@ The residual itself splits into *rare* (seen, but fewer than $\tau$ times) and
 or participles. DCS analyses these into members or roots, so they never appear
 as lemmas at all (§11).
 
-**Code.** `oov.decompose` (`src/vidruma/oov.py:50`), `oov.string_counts`
+**Code.** `oov.decompose` (`src/pravaala/oov.py:50`), `oov.string_counts`
 (`oov.py:30`), driver `scripts/oov_report.py:52`.
 
 ---
@@ -318,7 +318,7 @@ times $c$ occurs within $L$ positions of $w$ in the same sentence. A pair at
 distance $d$ contributes $1/d$ (harmonic weighting, as in GloVe), so nearer
 words count more.
 
-**Code.** `embed.cooccurrence` (`src/vidruma/embed.py:35`).
+**Code.** `embed.cooccurrence` (`src/pravaala/embed.py:35`).
 
 ### 7.2 Pointwise mutual information: discounting frequent words
 
@@ -418,7 +418,7 @@ $\mathbf{w}_i^\top \mathbf{u}_j = \mathrm{PMI}(i,j)$. GloVe is therefore
 another factorisation of PMI, by *weighted* least squares, with $f$
 down-weighting rare and noisy cells. Final vectors are $W + U$.
 
-**Code.** `glove.train_glove_reference` (`src/vidruma/glove.py`) runs the
+**Code.** `glove.train_glove_reference` (`src/pravaala/glove.py`) runs the
 reference implementation (github.com/stanfordnlp/GloVe) on the same corpus file
 and window: symmetric window with $1/d$ weighting, as in 7.1; 50 iterations;
 $x_{\max}=10$, as in the reference demo for small corpora (the paper's 100 was
@@ -488,7 +488,7 @@ words is scored on an easier set. So when we compare models, we score all of
 them on the **intersection** of the items they all cover, and use paired
 tests (McNemar for the MCQ) on that set.
 
-**Code.** `evaluate.relatedness` (`src/vidruma/evaluate.py:47`),
+**Code.** `evaluate.relatedness` (`src/pravaala/evaluate.py:47`),
 `evaluate.synonym_mcq` (`evaluate.py:76`); common support in
 `scripts/make_tables.py` (`--common_support`).
 
@@ -641,7 +641,7 @@ task by task. Its behaviour differs from ours in four ways:
 `evalsan_raw` keeps the original WX words, reproducing the encoding mismatch
 exactly. The difference between the two isolates the effect of §4.
 
-**Code.** `src/vidruma/evalsan_compat.py` (self-contained; nothing else
+**Code.** `src/pravaala/evalsan_compat.py` (self-contained; nothing else
 imports it).
 
 ---
@@ -678,7 +678,7 @@ is a sorting hint (high margin, no warning flags), not an acceptance.
 tell a *tatpuruṣa* (*rāja-puruṣa*, "king's man") from a *dvandva*. Treat its
 results as a lower bound.
 
-**Code.** `src/vidruma/plugins/compose.py`: `Segmenter.kbest` (line 85),
+**Code.** `src/pravaala/plugins/compose.py`: `Segmenter.kbest` (line 85),
 `candidates` (line 106), `augment` (line 150);
 `scripts/compose_candidates.py`; evaluated by
 `scripts/evaluate.py --plugins compose` (line 126).

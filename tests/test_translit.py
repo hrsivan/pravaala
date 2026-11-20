@@ -1,4 +1,4 @@
-from vidruma.translit import (deva_to_slp1, iast_to_slp1, slp1_to_iast,
+from pravaala.translit import (deva_to_slp1, iast_to_slp1, slp1_to_iast,
                               slp1_to_wx, wx_to_slp1, detect_scheme)
 
 

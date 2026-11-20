@@ -23,8 +23,8 @@ from scipy.stats import binomtest, spearmanr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from vidruma import benchmarks as bm  # noqa: E402
-from vidruma.evaluate import auc  # noqa: E402
+from pravaala import benchmarks as bm  # noqa: E402
+from pravaala.evaluate import auc  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--subset", default="all_nolex+np")

@@ -1,4 +1,4 @@
-# Vidruma from scratch
+# Pravaala from scratch
 
 This document builds the project up in the order in which one would build it:
 **define the task → decide how success is measured → prepare the data →
@@ -138,7 +138,7 @@ dental *t*, WX `t` is retroflex *ṭ*. *amṛta* is `amfta` in SLP1 and `amqwa` 
 WX. If the corpus is in one scheme and the benchmark in the other, lookups
 fail silently. **At scale** this is what happened in EvalSan: its relatedness
 and synonym files are WX while its vectors are SLP1. We convert everything to
-SLP1 (`src/vidruma/translit.py`).
+SLP1 (`src/pravaala/translit.py`).
 
 ### 3.2 The toy corpus in three views
 
@@ -580,7 +580,7 @@ What the real system adds on top of the toy:
 * **OOV accounting.** Why each missing word is missing: encoding, sandhi,
   inflection, homograph splitting, or genuine rarity. Changing one step at a
   time and recording the OOV rate gives a telescoping sum.
-  (`src/vidruma/oov.py`)
+  (`src/pravaala/oov.py`)
 * **Per-varga analysis.** Which vargas are recovered, measured by *specific
   information*: how many bits knowing a word's varga tells you about its
   cluster, corrected for chance. (`scripts/analyse_vargas.py`)

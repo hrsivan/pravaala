@@ -1,4 +1,4 @@
-# Vidruma — From Varga to Vector Space
+# Pravaala — From Varga to Vector Space
 
 Sanskrit word embeddings at the level of lemmas and lemma IDs, trained on the
 Digital Corpus of Sanskrit (DCS) and evaluated on the EvalSan benchmarks and the
@@ -15,7 +15,7 @@ Amarakośa. Course project of Sai Sreemayee Sistla (2025114013) and Vinayak Shar
 ## Layout
 
 ```
-src/vidruma/
+src/pravaala/
   translit.py          IAST / Devanagari / WX -> SLP1 (canonical); scheme detection
   dcs.py               DCS CoNLL-U reader; views surf/seg/lem/lid/sense; shared word normalisation
   normalise.py         lemma normalisation (nasals, participle stems, compounds); respelling at lookup
@@ -64,8 +64,8 @@ git clone --depth 1 https://github.com/INDOLOGY/GRETIL-mirror     # only for sil
 cd ..
 ```
 
-Default paths are in `src/vidruma/paths.py` and can be overridden with the environment
-variables `VIDRUMA_DCS`, `VIDRUMA_EVALSAN`, `VIDRUMA_AMARA`, `VIDRUMA_GLOVE`, `VIDRUMA_GRETIL`.
+Default paths are in `src/pravaala/paths.py` and can be overridden with the environment
+variables `PRAVAALA_DCS`, `PRAVAALA_EVALSAN`, `PRAVAALA_AMARA`, `PRAVAALA_GLOVE`, `PRAVAALA_GRETIL`.
 The commands below use:
 
 ```bash

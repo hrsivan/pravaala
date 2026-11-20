@@ -119,3 +119,5 @@ Other analyses: `scripts/oov_report.py` (entropies, OOV decomposition), `scripts
 DCS (Oliver Hellwig), EvalSan (Sandhan et al. 2023), Amarakośa digitisation (University of
 Hyderabad, via amara-quiz), GRETIL, ByT5-Sanskrit (Nehrdich, Hellwig & Keutzer 2024),
 Stanford GloVe, gensim.
+
+Claude was used to generate some parts of the code.

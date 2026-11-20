@@ -1,4 +1,4 @@
-# Pravaala — From Varga to Vector Space
+# Pravāla — From Varga to Vector Space
 
 Sanskrit word embeddings at the level of lemmas and lemma IDs, trained on the
 Digital Corpus of Sanskrit (DCS) and evaluated on the EvalSan benchmarks and the

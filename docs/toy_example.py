@@ -1,5 +1,4 @@
-"""Every number in docs/FROM_SCRATCH.md's toy example, computed.
-
+"""
 usage: python docs/toy_example.py     (no dependencies beyond numpy, scipy, sklearn)
 Run it alongside the tutorial: each printed block corresponds to a section.
 """

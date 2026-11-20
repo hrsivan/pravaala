@@ -5,13 +5,6 @@ Digital Corpus of Sanskrit (DCS) and evaluated on the EvalSan benchmarks and the
 Amarakośa. Course project of Sai Sreemayee Sistla (2025114013) and Vinayak Sharma
 (2025114002).
 
-* **Mid-submission report:** [`report/midsem/main.pdf`](report/midsem/main.pdf)
-  (ACL format; source in `report/midsem/`).
-* **How everything works:** [`docs/EXPLAINER.md`](docs/EXPLAINER.md) (workflow diagram,
-  maths, code references) and [`docs/FROM_SCRATCH.md`](docs/FROM_SCRATCH.md) (the whole
-  system on a toy corpus you can follow by hand; numbers from `docs/toy_example.py`).
-* The original proposal is in `Proposal/` and `proposal.pdf`.
-
 ## Layout
 
 ```

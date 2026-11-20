@@ -58,11 +58,6 @@ freely, so a model faces far more distinct strings than meanings. We ask:
 \item[RQ3] How much of the OOV rate is inflection rather than sparsity, and
   how much ambiguity does lemma-level disambiguation resolve?
 \end{description}
-The grammatical tradition frames RQ3: Bhartṛhari
-\citep{iyer1965vakyapadiya} names association (\emph{saṃsarga}),
-co-presence (\emph{sāhacarya}) and topic (\emph{prakaraṇa}) among the
-factors that select a word's meaning, which is what a co-occurrence window
-observes \citep{harris1954,firth1957,matilal1990word}.
 
 \paragraph{Status.} We are at about half of the project. We have completed the data
 pipeline and normalisation, the benchmark audit and cleaned benchmark, the
@@ -126,7 +121,7 @@ $\Delta_{\mathrm{sandhi}}=\OOV_{\vk{surf}}-\OOV_{\vk{seg}}$ and so on: a
 telescoping identity that attributes the OOV rate to encoding, sandhi,
 inflection and homograph splitting, leaving a residual.
 
-\paragraph{Models as PMI estimators.} All four models estimate (variants of)
+\paragraph{Models as PMI estimators.} Pointwise mutual information (PMI) compares the true joint probability of the occurrence of a word $w$ and a context word $c$ to their joint probability when they are independent. All four models estimate (variants of)
 the pointwise mutual information matrix,
 $\PMI(w,c)=\log\frac{P(w,c)}{P(w)P(c)}$:
 \begin{itemize}
@@ -148,8 +143,7 @@ everywhere gets small PMI values however frequent it is.
 \ex Counting co-occurrence within a sentence, \emph{jala} and the particle
 \emph{ca} each co-occur once with each other and \emph{jala} once with
 \emph{pā}, yet $\PMI(\textit{jala},\textit{pā})=1.81$ bits and
-$\PMI(\textit{jala},\textit{ca})=0.81$: \emph{ca} keeps company with
-everything. On positive-PMI rows, cos(\emph{jala}, \emph{toya}) = 0.92 and
+$\PMI(\textit{jala},\textit{ca})=0.81$, as \emph{ca} co-occurs with many words. On positive-PMI rows, cos(\emph{jala}, \emph{toya}) = 0.92 and
 cos(\emph{jala}, \emph{agni}) = 0.08 (raw counts: 0.75 and 0.25).
 
 \paragraph{Lookup.} In \vk{lid} a string may name several vectors; we use

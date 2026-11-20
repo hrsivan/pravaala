@@ -4,7 +4,6 @@ import numpy as np
 import scipy.sparse as sp
 
 from vidruma.embed import Space
-from vidruma.glove import train_glove
 from vidruma.plugins import compose
 
 
@@ -30,14 +29,6 @@ def test_augment_does_not_modify_original():
     aug, added = compose.augment(s, {"ab": ["a", "b"], "zz": ["a", "q"]})
     assert added == ["ab"] and "ab" not in s and "ab" in aug
     assert np.isclose(aug.vec("ab") @ aug.vec("a"), 1 / np.sqrt(2))
-
-
-def test_glove_loss_decreases_and_shapes():
-    rng = np.random.default_rng(0)
-    C = sp.random(40, 40, density=0.3, random_state=0, data_rvs=lambda n: rng.integers(1, 50, n))
-    C = C + C.T
-    W = train_glove(C, dim=8, epochs=2, verbose=False)
-    assert W.shape == (40, 8) and np.isfinite(W).all()
 
 
 def test_space_save_load(tmp_path):

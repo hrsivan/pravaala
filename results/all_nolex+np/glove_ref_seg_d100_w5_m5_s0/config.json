@@ -1,0 +1,20 @@
+{
+ "subset": "all_nolex+np",
+ "view": "seg",
+ "model": "glove_ref",
+ "dim": "100",
+ "window": "5",
+ "min_count": "5",
+ "epochs": "5",
+ "glove_epochs": "50",
+ "glove_bin": "ext/GloVe/build",
+ "workers": "2",
+ "seed": "0",
+ "corpora": "data/corpora",
+ "results": "results",
+ "evalsan": "None",
+ "amara": "None",
+ "run": "glove_ref_seg_d100_w5_m5_s0",
+ "vocab": 81118,
+ "train_seconds": 619.5
+}

@@ -18,12 +18,16 @@ from vidruma import embed  # noqa: E402
 ap = argparse.ArgumentParser()
 ap.add_argument("--subset", default="all")
 ap.add_argument("--view", default="lid", choices=["surf", "seg", "lem", "lid", "sense"])
-ap.add_argument("--model", default="sgns", choices=["sgns", "fasttext", "ppmi_svd", "glove"])
+ap.add_argument("--model", default="sgns", choices=["sgns", "fasttext", "ppmi_svd", "glove_ref"],
+                help="sgns = word2vec skip-gram with negative sampling; "
+                     "glove_ref = the reference Stanford GloVe (needs --glove_bin)")
 ap.add_argument("--dim", type=int, default=300)
 ap.add_argument("--window", type=int, default=5)
 ap.add_argument("--min_count", type=int, default=5)
-ap.add_argument("--epochs", type=int, default=5, help="SGNS/FastText; GloVe uses --glove_epochs")
+ap.add_argument("--epochs", type=int, default=5, help="word2vec/FastText; GloVe uses --glove_epochs")
 ap.add_argument("--glove_epochs", type=int, default=25)
+ap.add_argument("--glove_bin", type=Path, default=paths.GLOVE_BIN,
+                help="glove_ref: build/ folder of github.com/stanfordnlp/GloVe")
 ap.add_argument("--workers", type=int, default=4)
 ap.add_argument("--seed", type=int, default=0)
 ap.add_argument("--corpora", type=Path, default=ROOT / "data" / "corpora")
@@ -54,15 +58,19 @@ if a.model in ("sgns", "fasttext"):
         oov = sorted(w for w in B if w not in space)
         np.savez_compressed(out / "subword_oov.npz", words=np.array(oov),
                             X=np.stack([kv[w] for w in oov]).astype(np.float32))
+elif a.model == "glove_ref":
+    from vidruma.glove import train_glove_reference
+    words, X, counts = train_glove_reference(corpus, a.glove_bin, a.dim, a.window, a.min_count,
+                                             epochs=a.glove_epochs, threads=a.workers,
+                                             seed=a.seed, workdir=out / "glove_work")
+    import shutil
+    shutil.rmtree(out / "glove_work", ignore_errors=True)
+    space = embed.Space(words, X, counts)
 else:
     sents = lambda: (l.split() for l in open(corpus, encoding="utf-8"))
     vocab, counts = embed.build_vocab(sents, a.min_count)
     C = embed.cooccurrence(sents, vocab, a.window)
-    if a.model == "ppmi_svd":
-        X = embed.svd_embeddings(C, a.dim, seed=a.seed)
-    else:
-        from vidruma.glove import train_glove
-        X = train_glove(C, a.dim, epochs=a.glove_epochs, seed=a.seed)
+    X = embed.svd_embeddings(C, a.dim, seed=a.seed)            # ppmi_svd
     space = embed.Space(list(vocab), X, counts)
 space.save(out / "vectors.npz")
 cfg = {k: str(v) for k, v in vars(a).items()} | {"run": run, "vocab": len(space.words),

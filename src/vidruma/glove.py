@@ -1,66 +1,65 @@
-r"""GloVe (Pennington, Socher & Manning 2014), AdaGrad on the nonzeros of C.
+r"""GloVe (Pennington, Socher & Manning 2014), via the reference implementation.
 
 Objective, over the nonzero entries of the co-occurrence matrix X:
     J = \sum_{ij: X_ij > 0} f(X_ij) ( w_i^T u_j + b_i + c_j - ln X_ij )^2,
-    f(x) = min(1, (x / x_max)^beta)      (beta = 3/4, x_max = 100).
+    f(x) = min(1, (x / x_max)^beta).
 
 Relation to PMI: if the biases absorb the marginals, b_i ~ ln X_i and
 c_j ~ ln X_j - ln N, then w_i^T u_j ~ ln(X_ij N / (X_i X_j)) = PMI(i, j).
 GloVe is therefore a *weighted* least-squares factorisation of (a biased
-version of) the PMI matrix, with f down-weighting rare, noisy cells; this
-puts all four models of the study (SGNS, SPPMI-SVD, GloVe, FastText) in
-one information-theoretic frame. Final vectors are W + U (the original
-paper's choice; it averages two noisy estimates of the same quantity).
+version of) the PMI matrix, which puts all four models of the study
+(word2vec/SGNS, PPMI-SVD, GloVe, FastText) in one information-theoretic frame.
 
-Uses the same co-occurrence matrix as the count model (embed.cooccurrence,
-harmonic weighting a(d) = 1/d, as in the reference implementation).
+An earlier AdaGrad implementation of our own stayed near chance on the
+benchmarks and was replaced by the reference code (github.com/stanfordnlp/GloVe).
 """
 from __future__ import annotations
 
 import numpy as np
-import scipy.sparse as sp
 
 
-def train_glove(C: sp.spmatrix, dim=300, epochs=25, lr=0.05, x_max=100.0,
-                beta=0.75, batch=200_000, seed=0, verbose=True) -> np.ndarray:
-    C = sp.coo_matrix(C)
-    i, j, x = C.row.astype(np.int64), C.col.astype(np.int64), C.data.astype(np.float64)
-    keep = x > 0
-    i, j, x = i[keep], j[keep], x[keep]
-    logx = np.log(x)
-    fx = np.minimum(1.0, (x / x_max) ** beta)
-    n = C.shape[0]
-    rng = np.random.default_rng(seed)
-    W = (rng.random((n, dim)) - 0.5) / dim
-    U = (rng.random((n, dim)) - 0.5) / dim
-    b, c = np.zeros(n), np.zeros(n)
-    # AdaGrad accumulators (init 1 as in the reference implementation)
-    gW, gU, gb, gc = np.ones((n, dim)), np.ones((n, dim)), np.ones(n), np.ones(n)
-    for ep in range(epochs):
-        perm = rng.permutation(len(x))
-        loss = 0.0
-        for s in range(0, len(x), batch):
-            k = perm[s:s + batch]
-            ii, jj = i[k], j[k]
-            diff = (W[ii] * U[jj]).sum(1) + b[ii] + c[jj] - logx[k]
-            g = fx[k] * diff                     # dJ/d(pred) / 2
-            loss += float((fx[k] * diff ** 2).sum())
-            dW = g[:, None] * U[jj]
-            dU = g[:, None] * W[ii]
-            # accumulate per-row gradients (rows repeat within a batch)
-            # scatter-add via sparse incidence matrices: DW = S_i dW, S_i[r, t] = [ii_t = r]
-            ar = np.arange(len(k))
-            DW = sp.csr_matrix((np.ones(len(k)), (ii, ar)), shape=(n, len(k))) @ dW
-            DU = sp.csr_matrix((np.ones(len(k)), (jj, ar)), shape=(n, len(k))) @ dU
-            Db = np.bincount(ii, g, n); Dc = np.bincount(jj, g, n)
-            rows_w, rows_u = np.unique(ii), np.unique(jj)
-            W[rows_w] -= lr * DW[rows_w] / np.sqrt(gW[rows_w])
-            U[rows_u] -= lr * DU[rows_u] / np.sqrt(gU[rows_u])
-            gW[rows_w] += DW[rows_w] ** 2
-            gU[rows_u] += DU[rows_u] ** 2
-            b -= lr * Db / np.sqrt(gb); gb += Db ** 2
-            c -= lr * Dc / np.sqrt(gc); gc += Dc ** 2
-        if verbose:
-            print(f"glove epoch {ep + 1}/{epochs}  J/nnz = {loss / len(x):.4f}", flush=True)
-    return W + U
+def train_glove_reference(corpus, bin_dir, dim=100, window=5, min_count=5, epochs=50,
+                          x_max=10.0, alpha=0.75, eta=0.05, threads=2, seed=0,
+                          workdir=None, memory_gb=2.0):
+    r"""GloVe with the reference implementation (Pennington et al. 2014;
+    github.com/stanfordnlp/GloVe, built with `make`; `bin_dir` is its build/).
 
+    Same corpus file and window as the other models; symmetric window with the
+    reference's 1/d distance weighting, as in our own co-occurrence counts.
+    Vectors are W + C (`-model 2`, as in the paper). x_max = 10 follows the
+    reference demo for small corpora (the paper's 100 was set for billions of
+    tokens). Returns (words, X, counts) in vocabulary order.
+    """
+    import subprocess
+    import tempfile
+    from pathlib import Path
+    bin_dir = Path(bin_dir)
+    wd = Path(workdir or tempfile.mkdtemp(prefix="glove_"))
+    wd.mkdir(parents=True, exist_ok=True)
+
+    def run(cmd, stdin, stdout):
+        with open(stdin, "rb") as fi, open(stdout, "wb") as fo:
+            subprocess.run(cmd, stdin=fi, stdout=fo, check=True, stderr=subprocess.DEVNULL)
+
+    run([bin_dir / "vocab_count", "-min-count", str(min_count), "-verbose", "0"],
+        corpus, wd / "vocab.txt")
+    run([bin_dir / "cooccur", "-memory", str(memory_gb), "-vocab-file", wd / "vocab.txt",
+         "-verbose", "0", "-window-size", str(window), "-symmetric", "1"], corpus, wd / "cooc.bin")
+    run([bin_dir / "shuffle", "-memory", str(memory_gb), "-verbose", "0"],
+        wd / "cooc.bin", wd / "cooc.shuf.bin")
+    subprocess.run([bin_dir / "glove", "-save-file", wd / "vectors", "-threads", str(threads),
+                    "-input-file", wd / "cooc.shuf.bin", "-x-max", str(x_max), "-alpha", str(alpha),
+                    "-eta", str(eta), "-iter", str(epochs), "-vector-size", str(dim),
+                    "-binary", "0", "-model", "2", "-vocab-file", wd / "vocab.txt",
+                    "-verbose", "0", "-seed", str(seed)],
+                   check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    counts = {}
+    for line in open(wd / "vocab.txt", encoding="utf-8"):
+        w, c = line.rstrip("\n").rsplit(" ", 1)
+        counts[w] = int(c)
+    words, rows = [], []
+    for line in open(wd / "vectors.txt", encoding="utf-8"):
+        parts = line.rstrip("\n").split(" ")
+        if parts[0] in counts:                   # skips the reference's <unk> row
+            words.append(parts[0]); rows.append(np.asarray(parts[1:], dtype=np.float32))
+    return words, np.stack(rows), np.array([counts[w] for w in words], dtype=float)

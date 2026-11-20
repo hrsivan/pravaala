@@ -15,12 +15,14 @@
 \newcommand{\OOV}{\operatorname{OOV}}
 \newcommand{\PMI}{\operatorname{PMI}}
 \newcommand{\code}[1]{\texttt{\small #1}}
-\newcommand{\ex}{\par\smallskip\noindent\textsc{Running example.}~}
+\newcommand{\ex}{\par\smallskip\noindent\textsc{Example.}~}
 
-\title{Pravaala: From Varga to Vector Space\\[2pt]
+\title{Pravāla: From Varga to Vector Space\\[2pt]
 \large Mid-Submission Report}
 
-\author{Sai Sreemayee Sistla \\ 2025114013 \And Vinayak Sharma \\ 2025114002}
+\author{Sai Sreemayee Sistla \\ 2025114013
+\And
+Vinayak Sharma \\ 2025114002}
 
 \begin{document}
 \maketitle
@@ -41,6 +43,8 @@ not, and PPMI-SVD is the strongest model. Under EvalSan's own protocol our
 models exceed the published static baselines on three of four tasks.
 We believe coverage, not technique, is the main limit right now.
 Some plans to procure silver-quality dataset with ~10M words is underway.
+
+Code and data are available at \url{https://github.com/hrsivan/pravaala}.
 \end{abstract}
 
 %==========================================================================
@@ -68,9 +72,8 @@ and the full test grid (RQ1). RQ2 and RQ3 have preliminary results
 %==========================================================================
 \section{Setup, with a running example}\label{sec:setup}
 %==========================================================================
-Each new notion is illustrated on the toy corpus of Table~\ref{tab:toy};
-\code{docs/toy\_example.py} reproduces every toy number. All logarithms are in base
-2.
+Each new notion is illustrated on the toy corpus of Table~\ref{tab:toy}.
+All logarithms are in base 2.
 
 \begin{table}[t]\centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -90,17 +93,18 @@ Each new notion is illustrated on the toy corpus of Table~\ref{tab:toy};
 10 & \emph{toyaṃ vahniśca} & \emph{toya vahni ca}\\
 \bottomrule
 \end{tabular}
-\caption{Running example. Gold: synsets \{\emph{jala, toya, salila}\}
-``water'', \{\emph{agni, vahni}\} ``fire''; vargas \{\emph{jala, toya,
+\caption{Running example. \\ Gold: synsets \{\emph{jala, toya, salila}\}
+``water'', \{\emph{agni, vahni}\} ``fire''; \\ vargas \{\emph{jala, toya,
 salila, nadī}\} and \{\emph{agni, vahni, dīpa}\}.}
 \label{tab:toy}
 \end{table}
 
 \paragraph{Views.} A \emph{view} maps every word occurrence in DCS
 (5.80M words, 770,945 sentences) to a token. We use \vk{surf} (written,
-sandhied), \vk{seg} (sandhi resolved), \vk{lem} (lemma strings), \vk{lid}
-(lemma IDs, which separate homographs) and \vk{sense} (sense IDs, where
-annotated); each undoes one source of variation.
+sandhied, ``surface form"), \vk{seg} (sandhi resolved, ``segmented form"),
+\vk{lem} (lemma strings), \vk{lid} (lemma IDs, which separate homographs)
+and \vk{sense} (sense IDs, where annotated); each undoes one source of
+variation.
 
 \ex Sentence 7 is written \emph{dīpe'gniḥ}: sandhi has absorbed the initial
 \emph{a} of \emph{agniḥ}, so \vk{surf} never sees \emph{agni}. \vk{seg}
@@ -136,9 +140,21 @@ $\PMI(w,c)=\log\frac{P(w,c)}{P(w)P(c)}$:
 \item \textbf{FastText} \citep{bojanowski2017enriching}: word2vec over
   character $n$-grams, which yields vectors for unseen strings.
 \end{itemize}
-A word's average PMI with its own contexts is the KL divergence of its
-context distribution from the background, so a particle that occurs
-everywhere gets small PMI values however frequent it is.
+PMI also explains how these models discount frequent words. Averaged over
+a word's own contexts, PMI is a Kullback--Leibler divergence,
+\[
+\textstyle\sum_c P(c\mid w)\,\PMI(w,c)=D_{\mathrm{KL}}(P_{C\mid w}\,\|\,P_C),
+\]
+where $P_{C\mid w}$ is the distribution of $w$'s contexts and $P_C$ the
+background: the information (in bits) that seeing $w$ gives about its
+neighbours. Its frequency-weighted average over all words is the mutual
+information $I(W;C)$. A particle such as \emph{ca} occurs in every kind of
+sentence, so its context distribution is close to the background, the
+divergence is small, and so are its PMI values, however frequent it is. A
+word with distinctive company, such as \emph{jala}, diverges further from
+the background (1.31 against 0.81 bits in the running example). This is
+the information-theoretic way of down-weighting high-frequency words, with
+no stop-word list.
 
 \ex Counting co-occurrence within a sentence, \emph{jala} and the particle
 \emph{ca} each co-occur once with each other and \emph{jala} once with
@@ -210,8 +226,13 @@ OOV items are excluded and \emph{coverage} is reported, and models are
 compared on their \emph{common support}. Relatedness is scored by Spearman
 $\rho$ and by $\mathrm{AUC}_{ij}=\Pr(s(X_i)>s(X_j))$ for same-synset (2),
 same-varga (1) and unrelated (0) pairs, which are invariant to each model's
-cosine scale; 3-way thresholds are tuned on dev. Clusterings are scored by
-NMI against a permutation null. Everything that is chosen is chosen on
+cosine scale; 3-way thresholds are tuned on dev.
+Clusterings are scored by normalised mutual information,
+$\mathrm{NMI}=2\,I(K;G)/(H(K)+H(G))$ between cluster labels $K$ and gold
+groups $G$, which, unlike purity, does not reward splitting into many
+small clusters. Since NMI is above zero even for random clusterings, we
+compare it with a permutation null: the mean NMI over shuffled gold labels.
+Everything that is chosen is chosen on
 \emph{dev} (relatedness dev split, even-numbered synonym items); test is
 used once.
 
@@ -260,8 +281,11 @@ $d=300$; others: the main setting.}
 \subsection{Test results (RQ1)}
 Table~\ref{tab:main} gives each run on its own coverage, and
 Table~\ref{tab:rq1} the same runs on their common support (1,496 pairs, 231
-synonym items), with exact McNemar tests on synonyms, Holm-corrected over
-the eight tests.
+synonym items). To check that a difference between two views is not due to
+chance, we look only at the synonym questions that exactly one of the two
+views answers correctly, and test whether they split more unevenly than a
+fair coin would. The resulting $p$-values are adjusted for the eight
+comparisons we make (four models, two pairs of views).
 
 \begin{table*}[t]\centering\small
 \setlength{\tabcolsep}{4.5pt}
@@ -287,19 +311,17 @@ McNemar $p$ for \vk{seg}$\to$\vk{lem} and \vk{lem}$\to$\vk{lid}.}
 \paragraph{Lemmatisation helps.} For every model, \vk{lem} beats \vk{seg} on
 relatedness and synonyms, on the common support as well as on each model's
 own coverage, which grows from 34\% to 49\%. On synonyms the gain is
-significant for PPMI-SVD (34 vs.\ 12 discordant items, $p_{\mathrm{Holm}}=0.011$)
-and GloVe ($p_{\mathrm{Holm}}=0.003$), and suggestive for FastText (0.063),
+significant for PPMI-SVD (34 vs.\ 12 discordant items, $p=0.011$)
+and GloVe ($p=0.003$), and suggestive for FastText (0.063),
 whose character $n$-grams already share evidence across inflected forms.
 
 \paragraph{Lemma IDs do not.} \vk{lid} and \vk{lem} are indistinguishable for
-every model (all $p_{\mathrm{Holm}}\ge0.32$), consistent with the small
+every model (all $p\ge0.32$), consistent with the small
 homography that IDs resolve (\S\ref{sec:prelim}).
 
 \paragraph{Models.} PPMI-SVD is best on every task ($\rho=0.50$,
 AUC$_{20}=0.85$, synonyms 64.0\%, categorisation NMI 0.77); word2vec and
-FastText follow, with GloVe last. Our own GloVe implementation, used
-earlier, stayed near chance ($\rho=0.03$), so all GloVe numbers come from the
-reference code. That the count-based model wins at 5.7M words agrees with
+FastText follow, with GloVe last. That the count-based model wins at 5.7M words agrees with
 \citet{levy2015improving}.
 
 \subsection{Comparison with Sandhan et al.}
@@ -333,8 +355,8 @@ the question's own varga.
 \paragraph{The data.} Training PPMI-SVD on nested halves of the corpus, each
 doubling adds about 7.4 points of relatedness coverage, and synonym accuracy
 on fixed items rises from 49.7\% (0.7M words) to 66.7\% (5.7M); $\rho$ is
-flattening (0.48 $\to$ 0.50 over the last doubling). More text, not
-technique, is the main lever, mostly through coverage.
+flattening (0.48 $\to$ 0.50 over the last doubling). This makes us conclude
+that more text, not technique, is the main lever, mostly through coverage.
 
 \subsection{Preliminary results for RQ2 and RQ3}\label{sec:prelim}
 \paragraph{RQ2.} All models recover the vargas far above chance (NMI
@@ -379,7 +401,6 @@ normalisation code and will be reported separately and combined.
   of cross-varga clusters \citep{agirre2009study}.
 \item RQ3: a homograph subset (\vk{lem} vs.\ \vk{lid} where it matters), and
   sense-level vectors on \vk{sense}.
-\item A small human ceiling study for the 3-way relatedness task.
 \end{itemize}
 \paragraph{Planned improvements.} Subword vectors for OOV words (FastText,
 already measured above); composing unattested compounds from their members,
